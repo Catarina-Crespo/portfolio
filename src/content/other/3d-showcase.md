@@ -7,7 +7,7 @@ description:
   en: "A round-up of modeling, texturing and lighting studies from the last year."
   pt: "Uma recolha de estudos de modelação, texturização e iluminação do último ano."
 mediaType: video
-videoUrl: "https://www.youtube.com/watch?v=R6MlUcmOul8"
+videoUrl: "https://youtu.be/rd8qN24z9NQ?si=CroPVqZMFce_KclV&t=12"
 year: 2025
 order: 1
 enabled: true

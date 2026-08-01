@@ -10,5 +10,5 @@ mediaType: image
 image: "https://picsum.photos/seed/design-poster/1200/1500"
 year: 2024
 order: 1
-enabled: true
+enabled: false
 ---

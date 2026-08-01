@@ -58,7 +58,7 @@ export const ui = {
     'home.disciplines.photography.title': 'Photography',
     'home.disciplines.photography.desc': 'Events and landscapes, chasing light worth keeping.',
     'home.disciplines.stopmotion.title': 'Stop Motion',
-    'home.disciplines.stopmotion.desc': 'Frame-by-frame worlds built from cardboard and LEGO.',
+    'home.disciplines.stopmotion.desc': 'Frame-by-frame worlds built from LEGO and everything else.',
     'home.disciplines.other.title': 'Other Works',
     'home.disciplines.other.desc': '3D design, motion graphics and the odd side project.',
     'home.selected.eyebrow': 'Selected Work',
@@ -95,7 +95,7 @@ export const ui = {
     'stopmotion.eyebrow': 'Stop Motion',
     'stopmotion.title': 'Stop Motion',
     'stopmotion.intro':
-      'One frame at a time. It started with as a hobby, but I finally turned into a small LEGO filmography — reels, shorts and a couple of proper films.',
+      'One frame at a time. It started as a hobby, but I finally turned into a small LEGO filmography — reels, shorts and a couple of proper films.',
     'stopmotion.filter.all': 'All',
     'stopmotion.filter.other': 'Other',
     'stopmotion.filter.lego': 'LEGO',
@@ -109,7 +109,7 @@ export const ui = {
     'stopmotion.vertical.desc': 'Vertical cuts, made for phones — swipe or scroll through.',
 
     'home.testimonials.eyebrow': 'Testimonials',
-    'home.testimonials.title': 'What clients say',
+    'home.testimonials.title': 'What people say',
 
     'other.eyebrow': 'Other Works',
     'other.title': 'Other Works',
@@ -155,7 +155,7 @@ export const ui = {
       'Portfolio of a filmmaker and visual storyteller working across film, photography and stop motion.',
     'meta.filming.description': 'Interviews, short films and videoclips.',
     'meta.photography.description': 'Event and landscape photography.',
-    'meta.stopmotion.description': 'Cardboard and LEGO stop-motion films.',
+    'meta.stopmotion.description': 'LEGO stop-motion films.',
     'meta.other.description': '3D design, motion graphics and design projects.',
     'meta.about.description': 'A little about who is behind the camera.',
     'meta.contact.description': 'Get in touch about a project.',
@@ -202,7 +202,7 @@ export const ui = {
     'home.disciplines.photography.title': 'Fotografia',
     'home.disciplines.photography.desc': 'Eventos e paisagens, à procura da luz que vale a pena guardar.',
     'home.disciplines.stopmotion.title': 'Stop Motion',
-    'home.disciplines.stopmotion.desc': 'Mundos construídos frame a frame, em cartão e LEGO.',
+    'home.disciplines.stopmotion.desc': 'Mundos construídos frame a frame, em LEGO e tudo o resto.',
     'home.disciplines.other.title': 'Outros Trabalhos',
     'home.disciplines.other.desc': 'Design 3D, motion graphics e alguns projetos paralelos.',
     'home.selected.eyebrow': 'Trabalhos Selecionados',
@@ -253,7 +253,7 @@ export const ui = {
     'stopmotion.vertical.desc': 'Cortes verticais, feitos para telemóvel — deslize ou percorra.',
 
     'home.testimonials.eyebrow': 'Testemunhos',
-    'home.testimonials.title': 'O que dizem os clientes',
+    'home.testimonials.title': 'O que dizem as pessoas',
 
     'other.eyebrow': 'Outros Trabalhos',
     'other.title': 'Outros Trabalhos',
@@ -299,7 +299,7 @@ export const ui = {
       'Portefólio de um cineasta e contador de histórias visuais, entre filme, fotografia e stop motion.',
     'meta.filming.description': 'Entrevistas, curtas-metragens e videoclipes.',
     'meta.photography.description': 'Fotografia de eventos e paisagem.',
-    'meta.stopmotion.description': 'Filmes de stop motion em cartão e LEGO.',
+    'meta.stopmotion.description': 'Filmes de stop motion em LEGO.',
     'meta.other.description': 'Design 3D, motion graphics e projetos de design.',
     'meta.about.description': 'Um pouco sobre quem está atrás da câmara.',
     'meta.contact.description': 'Entre em contacto sobre um projeto.',

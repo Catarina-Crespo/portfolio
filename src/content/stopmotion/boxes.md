@@ -5,8 +5,8 @@ title:
   en: "Time Treat"
   pt: "Time Treat"
 description:
-  en: "Where it all started — a small workshop built entirely from cardboard, brought to life frame by frame."
-  pt: "Onde tudo começou — uma pequena oficina construída inteiramente em cartão, animada frame a frame."
+  en: "A commission for a client showcasing his product"
+  pt: "Uma encomenda para um cliente a apresentar o seu produto"
 videoUrl: "images/stopmotion/timetreat.mp4"
 thumbnail: "images/stopmotion/thumb_1.png"
 year: 2022

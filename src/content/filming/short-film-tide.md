@@ -11,7 +11,7 @@ role:
   pt: "Argumento, Realização, Edição"
 videoUrl: "images/filming/films/cordasDaMemoria.mp4"
 thumbnail: "images/filming/films/thumb_1.png"
-year: 2024
+year: 2026
 order: 1
 enabled: true
 featured: true

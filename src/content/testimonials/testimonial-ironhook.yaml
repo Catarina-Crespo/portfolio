@@ -1,0 +1,9 @@
+name: "@IronhookFilms"
+role:
+  en: "YouTube, Video 'LEGO Sniper'"
+  pt: "YouTube, Vídeo 'LEGO Sniper'"
+quote:
+  en: "This is absolutely amazing! Great lightning, super smooth animation, perfect sound track and an extremely well told, melancholic, storyline."
+  pt: "Isto é absolutamente incrível! Iluminação fantástica, animação super fluída, banda sonora perfeita e uma história melancólica extremamente bem contada."
+order: 3
+enabled: true

@@ -10,5 +10,5 @@ mediaType: image
 image: "https://picsum.photos/seed/design-branding/1200/900"
 year: 2024
 order: 2
-enabled: true
+enabled: false
 ---

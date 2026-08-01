@@ -1,0 +1,10 @@
+name: "withoutfire"
+role:
+  en: "Fiverr"
+  pt: "Fiverr"
+quote:
+  en: "Really good quality of animation, delivered on time and with clear communications. Recommended."
+  pt: "Animação de grande qualidade, entregue dentro do prazo e com uma comunicação clara. Recomendo."
+avatar: "https://picsum.photos/seed/testimonial-rui/200/200"
+order: 2
+enabled: false

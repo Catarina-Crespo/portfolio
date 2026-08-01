@@ -1,14 +1,15 @@
 ---
 category: motion-graphics
 title:
-  en: "Motion Graphics Reel"
-  pt: "Reel de Motion Graphics"
+  en: "Atlantis Film"
+  pt: "Filme Atlantis"
 description:
-  en: "Animated titles, lower thirds and a couple of brand explainers."
-  pt: "Títulos animados, lower thirds e alguns vídeos explicativos de marca."
+  en: "A Motion Graphics short film for a university project"
+  pt: "Uma curta-metragem de animação gráfica para um projeto universitário.."
 mediaType: video
-videoUrl: "https://www.youtube.com/watch?v=aqz-KE-bpKQ"
-year: 2025
+videoUrl: "images/other/motion_graphics.mp4"
+thumbnail: "images/other/motion_graphics.png"
+year: 2026
 order: 1
 enabled: true
 ---
