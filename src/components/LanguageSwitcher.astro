@@ -1,0 +1,35 @@
+---
+import { getLocalizedPath, type Lang } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+  class?: string;
+}
+const { lang, class: className = '' } = Astro.props;
+
+const enHref = getLocalizedPath(Astro.url, 'en');
+const ptHref = getLocalizedPath(Astro.url, 'pt');
+---
+
+<div class={`inline-flex items-center rounded-full border border-ink-700 bg-ink-900/60 p-0.5 ${className}`}>
+  <a
+    href={enHref}
+    class:list={[
+      'px-2.5 py-1 rounded-full timecode transition-colors',
+      lang === 'en' ? 'bg-amber-500 text-ink-950' : 'text-paper-400 hover:text-paper-100',
+    ]}
+    aria-current={lang === 'en' ? 'true' : 'false'}
+  >
+    EN
+  </a>
+  <a
+    href={ptHref}
+    class:list={[
+      'px-2.5 py-1 rounded-full timecode transition-colors',
+      lang === 'pt' ? 'bg-amber-500 text-ink-950' : 'text-paper-400 hover:text-paper-100',
+    ]}
+    aria-current={lang === 'pt' ? 'true' : 'false'}
+  >
+    PT
+  </a>
+</div>

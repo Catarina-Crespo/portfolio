@@ -1,0 +1,10 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import OtherWorks from "../components/pages/OtherWorks.astro";
+import { useTranslations } from "../i18n/utils";
+const lang = "en" as const;
+const t = useTranslations(lang);
+---
+<BaseLayout lang={lang} title={t("nav.other")} description={t("meta.other.description")}>
+  <OtherWorks lang={lang} />
+</BaseLayout>

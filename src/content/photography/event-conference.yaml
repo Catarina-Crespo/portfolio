@@ -1,0 +1,32 @@
+kind: event
+title:
+  en: "Water Gun Royale 2026"
+  pt: "Water Gun Royale 2026"
+description:
+  en: "The annual epic water gun battle in the center of Lisbon"
+  pt: "A anual luta épica de pistolas de água no centro de Lisboa"
+location:
+  en: "Lisboa, Portugal"
+  pt: "Lisboa, Portugal"
+date: "2026-07-02"
+order: 2
+enabled: true
+images:
+  - src: "images/photography/water_fight/6.jpg"
+    alt: { en: "Opening keynote on stage", pt: "Keynote de abertura no palco" }
+    size: wide
+  - src: "images/photography/water_fight/1.jpg"
+    alt: { en: "Speaker portrait backstage", pt: "Retrato do orador nos bastidores" }
+    size: normal
+  - src: "images/photography/water_fight/3.jpg"
+    alt: { en: "Audience listening", pt: "Audiência a ouvir" }
+    size: tall
+  - src: "images/photography/water_fight/2.jpg"
+    alt: { en: "Networking break", pt: "Pausa para networking" }
+    size: normal
+  - src: "images/photography/water_fight/4.jpg"
+    alt: { en: "Panel discussion", pt: "Painel de discussão" }
+    size: normal
+  - src: "images/photography/water_fight/5.jpg"
+    alt: { en: "Panel discussion", pt: "Painel de discussão" }
+    size: normal

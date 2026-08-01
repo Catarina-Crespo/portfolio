@@ -1,0 +1,65 @@
+---
+import VideoPlayer from './react/VideoPlayer.tsx';
+
+interface Props {
+  title: string;
+  description?: string;
+  meta?: string; // e.g. role or "2025"
+  code: string; // catalog code, e.g. "INT_01"
+  videoUrl?: string;
+  thumbnail?: string;
+  image?: string; // for static-image works (e.g. design projects)
+  playLabel: string;
+  comingSoonLabel?: string;
+  aspect?: 'video' | 'portrait' | 'shorts' | 'square';
+  class?: string;
+}
+const {
+  title,
+  description,
+  meta,
+  code,
+  videoUrl,
+  thumbnail,
+  image,
+  playLabel,
+  comingSoonLabel,
+  aspect = 'video',
+  class: className = '',
+} = Astro.props;
+
+const imageAspectClass =
+  aspect === 'portrait' ? 'aspect-[3/4]' : aspect === 'shorts' ? 'aspect-[9/16]' : aspect === 'square' ? 'aspect-square' : 'aspect-video';
+---
+
+<article class:list={['group', className]} data-reveal>
+  <div class="relative">
+    {image && !videoUrl ? (
+      <div class:list={['slate-frame overflow-hidden rounded-[var(--radius-card)] bg-ink-900', imageAspectClass]}>
+        <img
+          src={image}
+          alt=""
+          loading="lazy"
+          class="h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]"
+        />
+      </div>
+    ) : (
+      <VideoPlayer client:visible videoUrl={videoUrl} thumbnail={thumbnail} title={title} playLabel={playLabel} aspect={aspect} />
+    )}
+    <span class="timecode absolute left-3 top-3 rounded bg-ink-950/70 px-2 py-1 text-paper-300 backdrop-blur-sm">
+      {code}
+    </span>
+    {!videoUrl && comingSoonLabel && (
+      <span class="timecode absolute right-3 top-3 rounded bg-amber-500 px-2 py-1 text-ink-950">
+        {comingSoonLabel}
+      </span>
+    )}
+  </div>
+  <div class="mt-4">
+    <div class="flex items-start justify-between gap-3">
+      <h3 class="font-display text-lg font-semibold text-paper-100">{title}</h3>
+      {meta && <span class="timecode shrink-0 text-paper-400 pt-1">{meta}</span>}
+    </div>
+    {description && <p class="mt-1.5 text-sm text-paper-400 leading-relaxed">{description}</p>}
+  </div>
+</article>

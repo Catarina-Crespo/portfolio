@@ -1,0 +1,10 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import StopMotion from "../components/pages/StopMotion.astro";
+import { useTranslations } from "../i18n/utils";
+const lang = "en" as const;
+const t = useTranslations(lang);
+---
+<BaseLayout lang={lang} title={t("nav.stopmotion")} description={t("meta.stopmotion.description")}>
+  <StopMotion lang={lang} />
+</BaseLayout>

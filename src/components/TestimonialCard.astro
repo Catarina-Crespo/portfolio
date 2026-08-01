@@ -1,0 +1,36 @@
+---
+import { catalogCode } from '../utils/catalog';
+
+interface Props {
+  name: string;
+  role?: string;
+  quote: string;
+  avatar?: string;
+  index: number;
+  ariaHidden?: boolean;
+}
+const { name, role, quote, avatar, index, ariaHidden = false } = Astro.props;
+---
+
+<figure
+  class="slate-frame relative flex w-[320px] shrink-0 flex-col rounded-[var(--radius-card)] border border-ink-700 bg-ink-900/50 p-6 sm:w-[360px]"
+  aria-hidden={ariaHidden ? 'true' : undefined}
+  tabindex={ariaHidden ? '-1' : undefined}
+>
+  <span class="timecode absolute right-4 top-4 text-paper-400">{catalogCode('REVIEW', index)}</span>
+  <svg class="h-6 w-6 fill-amber-500/70 mb-4" viewBox="0 0 32 32" aria-hidden="true">
+    <path d="M10 9C6.5 9 4 12 4 16c0 3.5 2.5 6 5.5 6 .3 2.4-1 4.6-3.5 5.5l1 2c4-1 6.5-4.3 6.5-8.5V15c0-3.8-1.6-6-3.5-6zm14 0c-3.5 0-6 3-6 7 0 3.5 2.5 6 5.5 6 .3 2.4-1 4.6-3.5 5.5l1 2c4-1 6.5-4.3 6.5-8.5V15c0-3.8-1.6-6-3.5-6z"/>
+  </svg>
+  <blockquote class="flex-1 text-paper-200 leading-relaxed">
+    {quote}
+  </blockquote>
+  <figcaption class="mt-6 flex items-center gap-3">
+    {avatar && (
+      <img src={avatar} alt="" loading="lazy" class="h-10 w-10 shrink-0 rounded-full border border-ink-700 object-cover" />
+    )}
+    <div>
+      <p class="text-sm font-medium text-paper-100">{name}</p>
+      {role && <p class="timecode text-paper-400">{role}</p>}
+    </div>
+  </figcaption>
+</figure>

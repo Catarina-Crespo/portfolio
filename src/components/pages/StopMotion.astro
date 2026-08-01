@@ -1,0 +1,140 @@
+---
+import { getCollection } from 'astro:content';
+import { useTranslations, type Lang } from '../../i18n/utils';
+import SectionHeading from '../SectionHeading.astro';
+import WorkCard from '../WorkCard.astro';
+import { catalogCode } from '../../utils/catalog';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const enabled = (await getCollection('stopmotion')).filter((i) => i.data.enabled).sort((a, b) => a.data.order - b.data.order);
+
+// Vertical clips (Shorts/Reels-style, shot 9:16) get their own shelf
+// instead of sitting in the main landscape grid — set `orientation: portrait`
+// in the frontmatter to move an item here.
+const landscapeAll = enabled.filter((i) => i.data.orientation !== 'portrait');
+const verticalAll = enabled.filter((i) => i.data.orientation === 'portrait');
+
+let boxIndex = 0;
+let legoIndex = 0;
+const items = landscapeAll.map((item) => {
+  const code =
+    item.data.material === 'other' ? catalogCode('OTHER', ++boxIndex) : catalogCode('LEGO', ++legoIndex);
+  return { item, code };
+});
+
+let vBoxIndex = 0;
+let vLegoIndex = 0;
+const verticalItems = verticalAll.map((item) => {
+  const code =
+    item.data.material === 'other' ? catalogCode('OTHERV', ++vBoxIndex) : catalogCode('LEGOV', ++vLegoIndex);
+  return { item, code };
+});
+
+const filters: { key: string; label: string }[] = [
+  { key: 'all', label: t('stopmotion.filter.all') },
+  { key: 'other', label: t('stopmotion.filter.other') },
+  { key: 'lego', label: t('stopmotion.filter.lego') },
+];
+---
+
+<section class="mx-auto max-w-7xl px-5 md:px-8 pt-16 pb-10">
+  <SectionHeading eyebrow={t('stopmotion.eyebrow')} title={t('stopmotion.title')} description={t('stopmotion.intro')} />
+</section>
+
+<section class="mx-auto max-w-7xl px-5 md:px-8 pb-20">
+  <div class="mb-10 flex flex-wrap gap-2" data-reveal role="group" aria-label="Filter">
+    {filters.map((f, i) => (
+      <button
+        type="button"
+        data-sm-filter={f.key}
+        aria-pressed={i === 0 ? 'true' : 'false'}
+        class:list={[
+          'timecode rounded-full border px-4 py-2 transition-colors',
+          i === 0
+            ? 'border-amber-500 bg-amber-500 text-ink-950'
+            : 'border-ink-700 text-paper-300 hover:border-amber-500/60 hover:text-paper-100',
+        ]}
+      >
+        {f.label}
+      </button>
+    ))}
+  </div>
+
+  <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+    {items.map(({ item, code }) => (
+      <div data-sm-card data-material={item.data.material}>
+        <WorkCard
+          title={item.data.title[lang]}
+          description={item.data.description?.[lang]}
+          meta={t(`stopmotion.format.${item.data.format}` as any)}
+          code={code}
+          videoUrl={item.data.videoUrl}
+          thumbnail={item.data.thumbnail}
+          playLabel={t('common.play')}
+          comingSoonLabel={item.data.format === 'upcoming' ? t('common.comingSoon') : undefined}
+        />
+      </div>
+    ))}
+  </div>
+</section>
+
+{verticalItems.length > 0 && (
+  <section class="mx-auto max-w-7xl px-5 md:px-8 pb-24">
+    <div class="mb-8" data-reveal>
+      <p class="timecode text-amber-500 mb-2">{t('stopmotion.vertical.title')}</p>
+      <p class="text-paper-400 max-w-lg">{t('stopmotion.vertical.desc')}</p>
+    </div>
+    <div class="shelf" data-reveal>
+      {verticalItems.map(({ item, code }) => (
+        <div class="w-[62vw] max-w-[240px] sm:w-[220px]">
+          <WorkCard
+            title={item.data.title[lang]}
+            description={item.data.description?.[lang]}
+            meta={t(`stopmotion.format.${item.data.format}` as any)}
+            code={code}
+            videoUrl={item.data.videoUrl}
+            thumbnail={item.data.thumbnail}
+            playLabel={t('common.play')}
+            comingSoonLabel={item.data.format === 'upcoming' ? t('common.comingSoon') : undefined}
+            aspect="shorts"
+          />
+        </div>
+      ))}
+    </div>
+  </section>
+)}
+
+<script>
+  function initStopMotionFilter() {
+    const buttons = document.querySelectorAll<HTMLButtonElement>('[data-sm-filter]');
+    const cards = document.querySelectorAll<HTMLElement>('[data-sm-card]');
+    if (!buttons.length) return;
+
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const filter = btn.dataset.smFilter;
+        buttons.forEach((b) => {
+          const active = b === btn;
+          b.setAttribute('aria-pressed', String(active));
+          b.classList.toggle('border-amber-500', active);
+          b.classList.toggle('bg-amber-500', active);
+          b.classList.toggle('text-ink-950', active);
+          b.classList.toggle('border-ink-700', !active);
+          b.classList.toggle('text-paper-300', !active);
+        });
+        cards.forEach((card) => {
+          const show = filter === 'all' || card.dataset.material === filter;
+          card.style.display = show ? '' : 'none';
+        });
+      });
+    });
+  }
+
+  initStopMotionFilter();
+  document.addEventListener('astro:page-load', initStopMotionFilter);
+</script>

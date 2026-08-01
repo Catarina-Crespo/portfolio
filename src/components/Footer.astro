@@ -1,0 +1,51 @@
+---
+import { useTranslations, localizePath, type Lang } from '../i18n/utils';
+import { site } from '../config/site';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const socials = Object.entries(site.socials).filter(([, url]) => url);
+const year = new Date().getFullYear();
+---
+
+<footer class="relative border-t border-ink-700/70 mt-24">
+  <div class="mx-auto max-w-7xl px-5 md:px-8 py-14 grid gap-10 md:grid-cols-3">
+    <div>
+      <a href={localizePath('/', lang)} class="font-display text-xl font-semibold text-paper-100">
+        {site.name}
+      </a>
+      <p class="mt-3 text-sm text-paper-400 max-w-xs">{lang === 'en' ? site.role.en : site.role.pt}</p>
+    </div>
+
+    <div class="timecode text-paper-400">
+      <p class="text-paper-100 mb-3">{t('nav.home')}</p>
+      <ul class="space-y-2">
+        <li><a class="hover:text-amber-500 transition-colors" href={localizePath('/filming', lang)}>{t('nav.filming')}</a></li>
+        <li><a class="hover:text-amber-500 transition-colors" href={localizePath('/photography', lang)}>{t('nav.photography')}</a></li>
+        <li><a class="hover:text-amber-500 transition-colors" href={localizePath('/stop-motion', lang)}>{t('nav.stopmotion')}</a></li>
+        <li><a class="hover:text-amber-500 transition-colors" href={localizePath('/other-works', lang)}>{t('nav.other')}</a></li>
+      </ul>
+    </div>
+
+    <div class="timecode text-paper-400">
+      <p class="text-paper-100 mb-3">{t('contact.direct.title')}</p>
+      <ul class="space-y-2">
+        <li><a class="hover:text-amber-500 transition-colors" href={`mailto:${site.email}`}>{site.email}</a></li>
+        {socials.map(([name, url]) => (
+          <li><a class="hover:text-amber-500 transition-colors capitalize" href={url} target="_blank" rel="noopener noreferrer">{name}</a></li>
+        ))}
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-ink-800">
+    <div class="mx-auto max-w-7xl px-5 md:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-2 timecode text-paper-400/80">
+      <p>&copy; {year} {site.name} — {t('footer.rights')}</p>
+      <p>{t('footer.made')}</p>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,94 @@
+---
+import { useTranslations, localizePath, type Lang } from '../../i18n/utils';
+import { site } from '../../config/site';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const L = (path: string) => localizePath(path, lang);
+
+// Edit these two lists freely — plain arrays, no schema to fight.
+const skills = [
+  'Cinematography', 'DaVinci Resolve', 'Premiere Pro', 'Photography',
+  'Blender', 'After Effects', 'Lighting', 'Stop Motion Rigging',
+  'Color Grading', 'Sound Design',
+];
+
+const timeline = [
+  { year: '2019', en: 'Picked up a hand-me-down camera and started filming friends.', pt: 'Peguei numa câmara emprestada e comecei a filmar amigos.' },
+  { year: '2021', en: 'First paid event photography gigs.', pt: 'Primeiros trabalhos pagos de fotografia de eventos.' },
+  { year: '2022', en: 'Made the first cardboard stop-motion short.', pt: 'Fiz a primeira curta de stop motion em cartão.' },
+  { year: '2024', en: '"Tide" screened at a regional short-film festival.', pt: '"Maré" exibida num festival regional de curtas-metragens.' },
+  { year: '2025', en: 'Started taking on interview and documentary work full-time.', pt: 'Comecei a dedicar-me a tempo inteiro a entrevistas e documentário.' },
+];
+---
+
+<section class="mx-auto max-w-7xl px-5 md:px-8 pt-16 pb-20">
+  <div class="grid gap-14 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+    <div data-reveal>
+      <div class="slate-frame overflow-hidden rounded-[var(--radius-card)] aspect-[4/5] bg-ink-900">
+        <img
+          src="https://picsum.photos/seed/portrait/900/1125"
+          alt={site.name}
+          class="h-full w-full object-cover"
+        />
+      </div>
+    </div>
+
+    <div>
+      <p class="timecode text-amber-500 mb-3 flex items-center gap-2" data-reveal>
+        <span class="h-px w-6 bg-amber-500/70"></span>
+        {t('about.eyebrow')}
+      </p>
+      <h1 class="font-display text-4xl sm:text-5xl font-semibold text-paper-100" data-reveal data-reveal-delay="60">
+        {t('about.title')}
+      </h1>
+      <p class="mt-5 text-lg text-paper-300 leading-relaxed" data-reveal data-reveal-delay="100">
+        {t('about.intro', { name: site.name })}
+      </p>
+      <div class="mt-6 space-y-4 text-paper-300 leading-relaxed" data-reveal data-reveal-delay="140">
+        <p>{t('about.bio.p1')}</p>
+        <p>{t('about.bio.p2')}</p>
+      </div>
+
+      <div class="mt-10" data-reveal data-reveal-delay="180">
+        <p class="timecode text-paper-400 mb-3">{t('about.skills.title')}</p>
+        <div class="flex flex-wrap gap-2">
+          {skills.map((skill) => (
+            <span class="timecode rounded-full border border-ink-700 px-3 py-1.5 text-paper-200">{skill}</span>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="border-y border-ink-700/70 bg-ink-900/40">
+  <div class="mx-auto max-w-3xl px-5 md:px-8 py-16">
+    <p class="timecode text-amber-500 mb-8" data-reveal>{t('about.timeline.title')}</p>
+    <ol class="relative border-l border-ink-700 pl-8 space-y-10">
+      {timeline.map((entry, i) => (
+        <li class="relative" data-reveal data-reveal-delay={i * 60}>
+          <span class="absolute -left-[calc(2rem+5px)] top-1 h-2.5 w-2.5 rounded-full bg-amber-500"></span>
+          <p class="timecode text-amber-500 mb-1">{entry.year}</p>
+          <p class="text-paper-300 leading-relaxed">{lang === 'en' ? entry.en : entry.pt}</p>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<section class="mx-auto max-w-7xl px-5 md:px-8 py-20 text-center">
+  <div data-reveal>
+    <h2 class="font-display text-3xl sm:text-4xl font-semibold text-paper-100">{t('about.cta.title')}</h2>
+    <p class="mt-3 text-paper-300">{t('about.cta.desc')}</p>
+    <a
+      href={L('/contact')}
+      class="mt-8 inline-flex items-center gap-2 rounded bg-amber-500 px-6 py-3 timecode text-ink-950 transition-colors hover:bg-amber-400"
+    >
+      {t('common.getInTouch')}
+    </a>
+  </div>
+</section>

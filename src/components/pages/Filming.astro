@@ -1,0 +1,96 @@
+---
+import { getCollection } from 'astro:content';
+import { useTranslations, type Lang } from '../../i18n/utils';
+import SectionHeading from '../SectionHeading.astro';
+import WorkCard from '../WorkCard.astro';
+import { catalogCode } from '../../utils/catalog';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const all = (await getCollection('filming')).filter((i) => i.data.enabled);
+
+const interviews = all.filter((i) => i.data.category === 'interview').sort((a, b) => a.data.order - b.data.order);
+const shortFilms = all.filter((i) => i.data.category === 'short-film').sort((a, b) => a.data.order - b.data.order);
+const videoclips = all.filter((i) => i.data.category === 'videoclip').sort((a, b) => a.data.order - b.data.order);
+---
+
+<section class="mx-auto max-w-7xl px-5 md:px-8 pt-16 pb-10">
+  <SectionHeading eyebrow={t('filming.eyebrow')} title={t('filming.title')} description={t('filming.intro')} />
+</section>
+
+{interviews.length > 0 && (
+  <section class="mx-auto max-w-7xl px-5 md:px-8 py-10">
+    <div class="flex items-end justify-between gap-6 mb-10" data-reveal>
+      <div>
+        <h3 class="font-display text-2xl font-semibold text-paper-100">{t('filming.interviews.title')}</h3>
+        <p class="mt-2 text-paper-400 max-w-lg">{t('filming.interviews.desc')}</p>
+      </div>
+    </div>
+    <div class="grid gap-8 sm:grid-cols-2">
+      {interviews.map((item, i) => (
+        <WorkCard
+          title={item.data.title[lang]}
+          description={item.data.description?.[lang]}
+          meta={item.data.role?.[lang] ?? (item.data.year ? String(item.data.year) : undefined)}
+          code={catalogCode('INT', i + 1)}
+          videoUrl={item.data.videoUrl}
+          thumbnail={item.data.thumbnail}
+          playLabel={t('common.play')}
+        />
+      ))}
+    </div>
+  </section>
+)}
+
+{shortFilms.length > 0 && (
+  <section class="mx-auto max-w-7xl px-5 md:px-8 py-10">
+    <div class="flex items-end justify-between gap-6 mb-10" data-reveal>
+      <div>
+        <h3 class="font-display text-2xl font-semibold text-paper-100">{t('filming.shortfilms.title')}</h3>
+        <p class="mt-2 text-paper-400 max-w-lg">{t('filming.shortfilms.desc')}</p>
+      </div>
+    </div>
+    <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      {shortFilms.map((item, i) => (
+        <WorkCard
+          title={item.data.title[lang]}
+          description={item.data.description?.[lang]}
+          meta={item.data.year ? String(item.data.year) : undefined}
+          code={catalogCode('SHRT', i + 1)}
+          videoUrl={item.data.videoUrl}
+          thumbnail={item.data.thumbnail}
+          playLabel={t('common.play')}
+        />
+      ))}
+    </div>
+  </section>
+)}
+
+{videoclips.length > 0 && (
+  <section class="mx-auto max-w-7xl px-5 md:px-8 py-10 pb-24">
+    <div class="flex items-end justify-between gap-6 mb-10" data-reveal>
+      <div>
+        <h3 class="font-display text-2xl font-semibold text-paper-100">{t('filming.videoclips.title')}</h3>
+        <p class="mt-2 text-paper-400 max-w-lg">{t('filming.videoclips.desc')}</p>
+      </div>
+    </div>
+    <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      {videoclips.map((item, i) => (
+        <WorkCard
+          title={item.data.title[lang]}
+          description={item.data.description?.[lang]}
+          meta={item.data.year ? String(item.data.year) : undefined}
+          code={catalogCode('CLIP', i + 1)}
+          videoUrl={item.data.videoUrl}
+          thumbnail={item.data.thumbnail}
+          playLabel={t('common.play')}
+          aspect="portrait"
+        />
+      ))}
+    </div>
+  </section>
+)}

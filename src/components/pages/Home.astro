@@ -1,0 +1,253 @@
+---
+import { getCollection } from 'astro:content';
+import { useTranslations, localizePath, type Lang } from '../../i18n/utils';
+import SectionHeading from '../SectionHeading.astro';
+import WorkCard from '../WorkCard.astro';
+import VideoPlayer from '../react/VideoPlayer.tsx';
+import { site } from '../../config/site';
+import TestimonialCard from '../TestimonialCard.astro';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const L = (path: string) => localizePath(path, lang);
+
+const filmingAll = (await getCollection('filming')).filter((i) => i.data.enabled);
+const stopmotionAll = (await getCollection('stopmotion')).filter((i) => i.data.enabled);
+const otherAll = (await getCollection('other')).filter((i) => i.data.enabled);
+const testimonials = (await getCollection('testimonials'))
+  .filter((i) => i.data.enabled)
+  .sort((a, b) => a.data.order - b.data.order);
+
+const highlight =
+  filmingAll.find((i) => i.data.featured) ??
+  stopmotionAll.find((i) => i.data.featured) ??
+  filmingAll.sort((a, b) => a.data.order - b.data.order)[0];
+
+const topShort = filmingAll
+  .filter((i) => i.data.category !== 'videoclip')
+  .sort((a, b) => a.data.order - b.data.order)[0];
+const topStopMotion = stopmotionAll
+  .filter((i) => i.data.format !== 'upcoming')
+  .sort((a, b) => a.data.order - b.data.order)[0];
+const topOther = otherAll.sort((a, b) => a.data.order - b.data.order)[0];
+
+const selectedWork = [
+  topShort && {
+    title: topShort.data.title[lang],
+    description: topShort.data.description?.[lang],
+    meta: topShort.data.year ? String(topShort.data.year) : undefined,
+    code: topShort.data.category === 'interview' ? 'INT_01' : 'SHRT_01',
+    videoUrl: topShort.data.videoUrl,
+    thumbnail: topShort.data.thumbnail,
+    href: L('/filming'),
+  },
+  topStopMotion && {
+    title: topStopMotion.data.title[lang],
+    description: topStopMotion.data.description?.[lang],
+    meta: topStopMotion.data.year ? String(topStopMotion.data.year) : undefined,
+    code: topStopMotion.data.material === 'other' ? 'OTHER_01' : 'LEGO_01',
+    videoUrl: topStopMotion.data.videoUrl,
+    thumbnail: topStopMotion.data.thumbnail,
+    href: L('/stop-motion'),
+  },
+  topOther && {
+    title: topOther.data.title[lang],
+    description: topOther.data.description?.[lang],
+    meta: topOther.data.year ? String(topOther.data.year) : undefined,
+    code: topOther.data.category === '3d-design' ? '3D_01' : topOther.data.category === 'motion-graphics' ? 'MOGR_01' : 'DSGN_01',
+    videoUrl: topOther.data.videoUrl,
+    thumbnail: topOther.data.thumbnail ?? topOther.data.image,
+    href: L('/other-works'),
+  },
+].filter(Boolean) as {
+  title: string;
+  description?: string;
+  meta?: string;
+  code: string;
+  videoUrl?: string;
+  thumbnail?: string;
+  href: string;
+}[];
+
+const disciplines = [
+  { href: L('/filming'), title: t('home.disciplines.filming.title'), desc: t('home.disciplines.filming.desc'), code: 'REEL_01' },
+  { href: L('/photography'), title: t('home.disciplines.photography.title'), desc: t('home.disciplines.photography.desc'), code: 'REEL_02' },
+  { href: L('/stop-motion'), title: t('home.disciplines.stopmotion.title'), desc: t('home.disciplines.stopmotion.desc'), code: 'REEL_03' },
+  { href: L('/other-works'), title: t('home.disciplines.other.title'), desc: t('home.disciplines.other.desc'), code: 'REEL_04' },
+];
+
+// Edit these freely — just placeholder numbers.
+const stats = [
+  { value: '6+', label: t('home.stats.years') },
+  { value: '80+', label: t('home.stats.projects') },
+  { value: '35+', label: t('home.stats.events') },
+  { value: '120K+', label: t('home.stats.frames') },
+];
+---
+
+<!-- HERO -->
+<section class="mx-auto max-w-7xl px-5 md:px-8 pt-14 pb-20 lg:pt-20 lg:pb-28">
+  <div class="grid gap-14 lg:grid-cols-[1.1fr_1fr] lg:items-center">
+    <div data-reveal>
+      <p class="timecode text-amber-500 mb-5 flex items-center gap-2">
+        <span class="rec-dot"></span>
+        {t('home.eyebrow')}
+      </p>
+      <h1 class="font-display text-4xl sm:text-5xl xl:text-6xl font-semibold leading-[1.05] text-paper-100">
+        {t('home.title').split('\n').map((line) => (
+          <span class="block">{line}</span>
+        ))}
+      </h1>
+      <p class="mt-6 max-w-md text-lg text-paper-300 leading-relaxed">
+        {t('home.subtitle', { name: site.name, role: lang === 'en' ? site.role.en : site.role.pt })}
+      </p>
+      <div class="mt-9 flex flex-wrap items-center gap-4">
+        <a
+          href="#highlight"
+          class="inline-flex items-center gap-2 rounded bg-amber-500 px-5 py-3 timecode text-ink-950 transition-colors hover:bg-amber-400"
+        >
+          {t('home.cta.primary')}
+        </a>
+        <a
+          href="#work"
+          class="nav-underline inline-flex items-center gap-2 px-1 py-3 timecode text-paper-200 hover:text-paper-100"
+        >
+          {t('home.cta.secondary')}
+        </a>
+      </div>
+    </div>
+
+    <div id="highlight" class="scroll-mt-24" data-reveal data-reveal-delay="120">
+      <div class="mb-3 flex items-center justify-between">
+        <p class="timecode text-paper-400 flex items-center gap-2">
+          <span class="rec-dot"></span>
+          {t('home.highlight.eyebrow')}
+        </p>
+      </div>
+      {highlight && (
+        <VideoPlayer
+          client:visible
+          videoUrl={highlight.data.videoUrl}
+          thumbnail={highlight.data.thumbnail}
+          title={highlight.data.title[lang]}
+          playLabel={t('common.play')}
+          aspect="video"
+        />
+      )}
+      <h2 class="mt-4 font-display text-xl font-semibold text-paper-100">{t('home.highlight.title')}</h2>
+      <p class="mt-1.5 text-sm text-paper-400 leading-relaxed max-w-md">{t('home.highlight.description')}</p>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="border-y border-ink-700/70 bg-ink-900/40">
+  <div class="mx-auto max-w-7xl px-5 md:px-8 py-10 grid grid-cols-2 gap-8 lg:grid-cols-4" data-reveal>
+    {stats.map((s) => (
+      <div>
+        <p class="font-display text-3xl sm:text-4xl font-semibold text-amber-500">{s.value}</p>
+        <p class="mt-1 timecode text-paper-400">{s.label}</p>
+      </div>
+    ))}
+  </div>
+</section>
+
+<!-- DISCIPLINES -->
+<section class="mx-auto max-w-7xl px-5 md:px-8 py-20 lg:py-28">
+  <SectionHeading eyebrow={t('home.disciplines.eyebrow')} title={t('home.disciplines.title')} />
+  <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+    {disciplines.map((d, i) => (
+      <a
+        href={d.href}
+        class="slate-frame group relative flex flex-col justify-between rounded-[var(--radius-card)] border border-ink-700 bg-ink-900/50 p-6 min-h-[14rem] transition-colors hover:border-amber-500/60"
+        data-reveal
+        data-reveal-delay={i * 80}
+      >
+        <span class="timecode text-paper-400">{d.code}</span>
+        <div>
+          <h3 class="font-display text-xl font-semibold text-paper-100 group-hover:text-amber-400 transition-colors">{d.title}</h3>
+          <p class="mt-2 text-sm text-paper-400 leading-relaxed">{d.desc}</p>
+        </div>
+      </a>
+    ))}
+  </div>
+</section>
+
+<!-- SELECTED WORK -->
+<section id="work" class="mx-auto max-w-7xl px-5 md:px-8 py-20 lg:py-28 scroll-mt-20">
+  <div class="flex flex-wrap items-end justify-between gap-6">
+    <SectionHeading eyebrow={t('home.selected.eyebrow')} title={t('home.selected.title')} />
+    <a href={L('/filming')} class="nav-underline timecode text-paper-300 hover:text-paper-100 pb-1">
+      {t('common.allWork')} →
+    </a>
+  </div>
+  <div class="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+    {selectedWork.map((w) => (
+      <a href={w.href} class="block">
+        <WorkCard
+          title={w.title}
+          description={w.description}
+          meta={w.meta}
+          code={w.code}
+          videoUrl={w.videoUrl}
+          thumbnail={w.thumbnail}
+          playLabel={t('common.play')}
+        />
+      </a>
+    ))}
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+{testimonials.length > 0 && (
+  <section class="py-20 lg:py-28">
+    <div class="mx-auto max-w-7xl px-5 md:px-8">
+      <SectionHeading eyebrow={t('home.testimonials.eyebrow')} title={t('home.testimonials.title')} />
+    </div>
+    <div class="marquee mt-12" data-reveal>
+      <div class="marquee-track" style={`animation-duration:${testimonials.length * 7}s`}>
+        {testimonials.map((item, i) => (
+          <TestimonialCard
+            name={item.data.name}
+            role={item.data.role?.[lang]}
+            quote={item.data.quote[lang]}
+            avatar={item.data.avatar}
+            index={i + 1}
+          />
+        ))}
+        {/* Duplicate set, hidden from assistive tech, closes the loop seamlessly at -50%. */}
+        {testimonials.map((item, i) => (
+          <TestimonialCard
+            name={item.data.name}
+            role={item.data.role?.[lang]}
+            quote={item.data.quote[lang]}
+            avatar={item.data.avatar}
+            index={i + 1}
+            ariaHidden
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+)}
+
+<!-- CLOSING CTA -->
+<section class="mx-auto max-w-7xl px-5 md:px-8 pb-24">
+  <div
+    class="slate-frame relative overflow-hidden rounded-[var(--radius-card)] border border-ink-700 bg-ink-900/60 px-8 py-14 sm:px-14 text-center"
+    data-reveal
+  >
+    <p class="timecode text-amber-500 mb-4">{t('home.eyebrow')}</p>
+    <h2 class="font-display text-3xl sm:text-4xl font-semibold text-paper-100">{t('home.cta.footer.title')}</h2>
+    <p class="mt-4 text-paper-300 max-w-lg mx-auto">{t('home.cta.footer.desc')}</p>
+    <a
+      href={L('/contact')}
+      class="mt-8 inline-flex items-center gap-2 rounded bg-amber-500 px-6 py-3 timecode text-ink-950 transition-colors hover:bg-amber-400"
+    >
+      {t('common.getInTouch')}
+    </a>
+  </div>
+</section>

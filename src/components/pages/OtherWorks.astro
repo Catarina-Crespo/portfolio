@@ -1,0 +1,96 @@
+---
+import { getCollection } from 'astro:content';
+import { useTranslations, type Lang } from '../../i18n/utils';
+import SectionHeading from '../SectionHeading.astro';
+import WorkCard from '../WorkCard.astro';
+import { catalogCode } from '../../utils/catalog';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const all = (await getCollection('other')).filter((i) => i.data.enabled);
+
+const threeD = all.filter((i) => i.data.category === '3d-design').sort((a, b) => a.data.order - b.data.order);
+const motion = all.filter((i) => i.data.category === 'motion-graphics').sort((a, b) => a.data.order - b.data.order);
+// Want to hide Design Projects entirely for now? Just delete/disable every
+// entry in src/content/other/ with category "design-project" — this
+// section disappears automatically once there are zero enabled items.
+const design = all.filter((i) => i.data.category === 'design-project').sort((a, b) => a.data.order - b.data.order);
+---
+
+<section class="mx-auto max-w-7xl px-5 md:px-8 pt-16 pb-10">
+  <SectionHeading eyebrow={t('other.eyebrow')} title={t('other.title')} description={t('other.intro')} />
+</section>
+
+{threeD.length > 0 && (
+  <section class="mx-auto max-w-7xl px-5 md:px-8 py-10">
+    <div class="mb-10" data-reveal>
+      <p class="timecode text-amber-500 mb-2">{t('other.3d.title')}</p>
+      <p class="text-paper-400 max-w-lg">{t('other.3d.desc')}</p>
+    </div>
+    <div class="grid gap-8 sm:grid-cols-2">
+      {threeD.map((item, i) => (
+        <WorkCard
+          title={item.data.title[lang]}
+          description={item.data.description?.[lang]}
+          meta={item.data.year ? String(item.data.year) : undefined}
+          code={catalogCode('3D', i + 1)}
+          videoUrl={item.data.videoUrl}
+          thumbnail={item.data.thumbnail}
+          image={item.data.image}
+          playLabel={t('common.play')}
+        />
+      ))}
+    </div>
+  </section>
+)}
+
+{motion.length > 0 && (
+  <section class="mx-auto max-w-7xl px-5 md:px-8 py-10">
+    <div class="mb-10" data-reveal>
+      <p class="timecode text-amber-500 mb-2">{t('other.motion.title')}</p>
+      <p class="text-paper-400 max-w-lg">{t('other.motion.desc')}</p>
+    </div>
+    <div class="grid gap-8 sm:grid-cols-2">
+      {motion.map((item, i) => (
+        <WorkCard
+          title={item.data.title[lang]}
+          description={item.data.description?.[lang]}
+          meta={item.data.year ? String(item.data.year) : undefined}
+          code={catalogCode('MOGR', i + 1)}
+          videoUrl={item.data.videoUrl}
+          thumbnail={item.data.thumbnail}
+          image={item.data.image}
+          playLabel={t('common.play')}
+        />
+      ))}
+    </div>
+  </section>
+)}
+
+{design.length > 0 && (
+  <section class="mx-auto max-w-7xl px-5 md:px-8 py-10 pb-24">
+    <div class="mb-10" data-reveal>
+      <p class="timecode text-amber-500 mb-2">{t('other.design.title')}</p>
+      <p class="text-paper-400 max-w-lg">{t('other.design.desc')}</p>
+    </div>
+    <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      {design.map((item, i) => (
+        <WorkCard
+          title={item.data.title[lang]}
+          description={item.data.description?.[lang]}
+          meta={item.data.year ? String(item.data.year) : undefined}
+          code={catalogCode('DSGN', i + 1)}
+          videoUrl={item.data.videoUrl}
+          thumbnail={item.data.thumbnail}
+          image={item.data.image}
+          playLabel={t('common.play')}
+          aspect="portrait"
+        />
+      ))}
+    </div>
+  </section>
+)}

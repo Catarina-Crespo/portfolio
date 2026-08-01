@@ -1,0 +1,16 @@
+---
+// Fine-pointer devices only — see src/scripts/cursor.ts, which adds
+// `has-custom-cursor` to <html> only when (hover: hover) and (pointer:
+// fine) both match, and leaves touch devices completely untouched.
+---
+
+<div id="custom-cursor" class="custom-cursor" aria-hidden="true">
+  <svg width="32" height="32" viewBox="0 0 32 32" class="cursor-svg">
+    <path d="M2 8V2H8" />
+    <path d="M24 2H30V8" />
+    <path d="M30 24V30H24" />
+    <path d="M8 30H2V24" />
+    <line x1="16" y1="13" x2="16" y2="19" class="cursor-cross" />
+    <line x1="13" y1="16" x2="19" y2="16" class="cursor-cross" />
+  </svg>
+</div>

@@ -1,0 +1,12 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Photography from "../components/pages/Photography.astro";
+import { useTranslations } from "../i18n/utils";
+
+const lang = "en" as const;
+const t = useTranslations(lang);
+---
+
+<BaseLayout lang={lang} title={t("nav.photography")} description={t("meta.photography.description")}>
+  <Photography lang={lang} />
+</BaseLayout>

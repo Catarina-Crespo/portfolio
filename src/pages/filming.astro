@@ -1,0 +1,12 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Filming from "../components/pages/Filming.astro";
+import { useTranslations } from "../i18n/utils";
+
+const lang = "en" as const;
+const t = useTranslations(lang);
+---
+
+<BaseLayout lang={lang} title={t("nav.filming")} description={t("meta.filming.description")}>
+  <Filming lang={lang} />
+</BaseLayout>

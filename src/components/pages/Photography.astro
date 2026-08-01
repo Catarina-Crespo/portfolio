@@ -1,0 +1,87 @@
+---
+import { getCollection } from 'astro:content';
+import { useTranslations, type Lang } from '../../i18n/utils';
+import SectionHeading from '../SectionHeading.astro';
+import PhotoMosaic from '../react/PhotoMosaic.tsx';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const all = (await getCollection('photography')).filter((i) => i.data.enabled);
+const events = all.filter((i) => i.data.kind === 'event').sort((a, b) => a.data.order - b.data.order);
+const landscapes = all.filter((i) => i.data.kind === 'landscape').sort((a, b) => a.data.order - b.data.order);
+---
+
+<section class="mx-auto max-w-7xl px-5 md:px-8 pt-16 pb-10">
+  <SectionHeading eyebrow={t('photography.eyebrow')} title={t('photography.title')} description={t('photography.intro')} />
+</section>
+
+{events.length > 0 && (
+  <section class="mx-auto max-w-7xl px-5 md:px-8 py-10">
+    <div class="mb-10" data-reveal>
+      <p class="timecode text-amber-500 mb-2">{t('photography.events.title')}</p>
+      <p class="text-paper-400 max-w-lg">{t('photography.events.desc')}</p>
+    </div>
+
+    <div class="space-y-16">
+      {events.map((event) => (
+        <div data-reveal>
+          <div class="flex flex-wrap items-baseline justify-between gap-3 mb-5">
+            <h3 class="font-display text-2xl font-semibold text-paper-100">{event.data.title[lang]}</h3>
+            <p class="timecode text-paper-400">
+              {event.data.location?.[lang]}
+              {event.data.location?.[lang] && event.data.date ? ' — ' : ''}
+              {event.data.date}
+            </p>
+          </div>
+          {event.data.description?.[lang] && (
+            <p class="text-paper-400 max-w-2xl mb-6">{event.data.description[lang]}</p>
+          )}
+          <PhotoMosaic
+            client:visible
+            images={event.data.images.map((img) => ({
+              src: img.src,
+              alt: img.alt?.[lang] ?? event.data.title[lang],
+              size: img.size,
+            }))}
+            closeLabel={t('common.close')}
+            prevLabel={t('common.previous')}
+            nextLabel={t('common.next')}
+          />
+        </div>
+      ))}
+    </div>
+  </section>
+)}
+
+{landscapes.length > 0 && (
+  <section class="mx-auto max-w-7xl px-5 md:px-8 py-10 pb-24">
+    <div class="mb-10" data-reveal>
+      <p class="timecode text-amber-500 mb-2">{t('photography.landscape.title')}</p>
+      <p class="text-paper-400 max-w-lg">{t('photography.landscape.desc')}</p>
+    </div>
+    <div class="space-y-16">
+      {landscapes.map((gallery) => (
+        <div data-reveal>
+          {gallery.data.description?.[lang] && (
+            <p class="text-paper-400 max-w-2xl mb-6">{gallery.data.description[lang]}</p>
+          )}
+          <PhotoMosaic
+            client:visible
+            images={gallery.data.images.map((img) => ({
+              src: img.src,
+              alt: img.alt?.[lang] ?? gallery.data.title[lang],
+              size: img.size,
+            }))}
+            closeLabel={t('common.close')}
+            prevLabel={t('common.previous')}
+            nextLabel={t('common.next')}
+          />
+        </div>
+      ))}
+    </div>
+  </section>
+)}

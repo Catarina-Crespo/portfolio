@@ -1,0 +1,39 @@
+kind: landscape
+title:
+  en: "Landscapes"
+  pt: "Paisagens"
+description:
+  en: "An ongoing collection, mostly shot at dawn or right before a storm."
+  pt: "Uma coleção contínua, na maioria fotografada ao amanhecer ou mesmo antes de uma tempestade."
+order: 1
+enabled: true
+images:
+  - src: "images/photography/landscape/1.jpg"
+    alt: { en: "Cliffs at sunrise", pt: "Falésias ao nascer do sol" }
+    size: normal
+  - src: "images/photography/landscape/2.jpg"
+    alt: { en: "Pine forest in fog", pt: "Floresta de pinheiros na neblina" }
+    size: tall
+  - src: "images/photography/landscape/9.jpg"
+    alt: { en: "Dune ridgeline", pt: "Linha de dunas" }
+    size: wide
+  - src: "images/photography/landscape/5.jpg"
+    alt: { en: "River bend at dusk", pt: "Curva do rio ao entardecer" }
+    size: tall
+  - src: "images/photography/landscape/4.jpg"
+    alt: { en: "Storm rolling over the valley", pt: "Tempestade sobre o vale" }
+    size: large
+  - src: "images/photography/landscape/8.jpg"
+    alt: { en: "Dune ridgeline", pt: "Linha de dunas" }
+    size: normal
+  - src: "images/photography/landscape/10.jpeg"
+    alt: { en: "Dune ridgeline", pt: "Linha de dunas" }
+    size: wide
+  - src: "images/photography/landscape/7.jpg"
+    alt: { en: "Frost on the highlands", pt: "Geada nas terras altas" }
+    size: normal
+  - src: "images/photography/landscape/6.jpg"
+    alt: { en: "Lighthouse, long exposure", pt: "Farol, longa exposição" }
+    size: normal
+
+

@@ -1,0 +1,35 @@
+kind: event
+title:
+  en: "EscsTunis at Bênção das Fitas (University Graduation Festival)"
+  pt: "EscsTunis na Bênção das Fitas"
+description:
+  en: "Tambourines in the air and capes billowing in the wind. The tuna's performance photographed from the front of the stage."
+  pt: "Pandeiretas no ar e capas ao vento. A atuação da tuna fotografada de frente para o palco."
+location:
+  en: "Lisboa, Portugal"
+  pt: "Lisboa, Portugal"
+date: "2025-07-19"
+order: 3
+enabled: true
+images:
+  - src: "images/photography/escstunis/1.jpg"
+    alt: { en: "Headliner under stage lights", pt: "Cabeça de cartaz sob as luzes do palco" }
+    size: large
+  - src: "images/photography/escstunis/2.jpg"
+    alt: { en: "Crowd at golden hour", pt: "Multidão à hora dourada" }
+    size: normal
+  - src: "images/photography/escstunis/3.jpg"
+    alt: { en: "Guitarist mid-solo", pt: "Guitarrista a meio de um solo" }
+    size: tall
+  - src: "images/photography/escstunis/4.jpg"
+    alt: { en: "Festival grounds at dusk", pt: "Recinto do festival ao entardecer" }
+    size: tall
+  - src: "images/photography/escstunis/5.jpg"
+    alt: { en: "Festival grounds at dusk", pt: "Recinto do festival ao entardecer" }
+    size: normal
+  - src: "images/photography/escstunis/6.jpg"
+    alt: { en: "Festival grounds at dusk", pt: "Recinto do festival ao entardecer" }
+    size: normal
+  - src: "images/photography/escstunis/7.jpg"
+    alt: { en: "Festival grounds at dusk", pt: "Recinto do festival ao entardecer" }
+    size: normal

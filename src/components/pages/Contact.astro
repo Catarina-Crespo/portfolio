@@ -1,0 +1,133 @@
+---
+import { useTranslations, type Lang } from '../../i18n/utils';
+import { site } from '../../config/site';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const socials = Object.entries(site.socials).filter(([, url]) => url);
+---
+
+<section class="mx-auto max-w-7xl px-5 md:px-8 pt-16 pb-24">
+  <div class="max-w-2xl" data-reveal>
+    <p class="timecode text-amber-500 mb-3 flex items-center gap-2">
+      <span class="h-px w-6 bg-amber-500/70"></span>
+      {t('contact.eyebrow')}
+    </p>
+    <h1 class="font-display text-4xl sm:text-5xl font-semibold text-paper-100">{t('contact.title')}</h1>
+    <p class="mt-5 text-lg text-paper-300 leading-relaxed">{t('contact.intro')}</p>
+  </div>
+
+  <div class="mt-14 grid gap-10 lg:grid-cols-[1.3fr_1fr]">
+    <form data-contact-form data-to={site.email} class="slate-frame rounded-[var(--radius-card)] border border-ink-700 bg-ink-900/50 p-6 sm:p-8 space-y-5" data-reveal data-reveal-delay="80">
+      <div class="grid gap-5 sm:grid-cols-2">
+        <label class="block">
+          <span class="timecode text-paper-400">{t('contact.form.name')}</span>
+          <input
+            type="text"
+            name="name"
+            required
+            class="mt-2 w-full rounded border border-ink-700 bg-ink-950/60 px-3.5 py-2.5 text-paper-100 outline-none transition-colors focus:border-amber-500"
+          />
+        </label>
+        <label class="block">
+          <span class="timecode text-paper-400">{t('contact.form.email')}</span>
+          <input
+            type="email"
+            name="email"
+            required
+            class="mt-2 w-full rounded border border-ink-700 bg-ink-950/60 px-3.5 py-2.5 text-paper-100 outline-none transition-colors focus:border-amber-500"
+          />
+        </label>
+      </div>
+      <label class="block">
+        <span class="timecode text-paper-400">{t('contact.form.subject')}</span>
+        <input
+          type="text"
+          name="subject"
+          required
+          class="mt-2 w-full rounded border border-ink-700 bg-ink-950/60 px-3.5 py-2.5 text-paper-100 outline-none transition-colors focus:border-amber-500"
+        />
+      </label>
+      <label class="block">
+        <span class="timecode text-paper-400">{t('contact.form.message')}</span>
+        <textarea
+          name="message"
+          rows="5"
+          required
+          class="mt-2 w-full rounded border border-ink-700 bg-ink-950/60 px-3.5 py-2.5 text-paper-100 outline-none transition-colors focus:border-amber-500"
+        ></textarea>
+      </label>
+      <button
+        type="submit"
+        class="inline-flex items-center gap-2 rounded bg-amber-500 px-6 py-3 timecode text-ink-950 transition-colors hover:bg-amber-400"
+      >
+        {t('contact.form.submit')}
+      </button>
+      <p data-contact-status class="timecode text-paper-400 hidden">{t('contact.form.sending')}</p>
+      <p class="text-xs text-paper-400 leading-relaxed pt-2">
+        {/* This form opens the visitor's email client with the message pre-filled —
+        no backend required. Swap in Formspree / Netlify Forms / etc. for a
+        fully in-page submission if you'd prefer. */}
+      </p>
+    </form>
+
+    <div class="space-y-6" data-reveal data-reveal-delay="140">
+      <div class="rounded-[var(--radius-card)] border border-ink-700 bg-ink-900/50 p-6">
+        <p class="timecode text-amber-500 mb-4">{t('contact.direct.title')}</p>
+        <a href={`mailto:${site.email}`} class="block text-paper-100 hover:text-amber-400 transition-colors">{site.email}</a>
+        {site.phone && <a href={`tel:${site.phone.replace(/\s+/g, '')}`} class="block mt-1 text-paper-300 hover:text-amber-400 transition-colors">{site.phone}</a>}
+      </div>
+
+      {socials.length > 0 && (
+        <div class="rounded-[var(--radius-card)] border border-ink-700 bg-ink-900/50 p-6">
+          <p class="timecode text-amber-500 mb-4">{t('contact.social.title')}</p>
+          <ul class="space-y-2">
+            {socials.map(([name, url]) => (
+              <li>
+                <a href={url} target="_blank" rel="noopener noreferrer" class="capitalize text-paper-300 hover:text-amber-400 transition-colors">
+                  {name}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      <div class="rounded-[var(--radius-card)] border border-ink-700 bg-ink-900/50 p-6">
+        <p class="timecode text-amber-500 mb-4">{t('contact.location.title')}</p>
+        <p class="text-paper-300">{lang === 'en' ? site.location.en : site.location.pt}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function initContactForm() {
+    const form = document.querySelector<HTMLFormElement>('[data-contact-form]');
+    if (!form) return;
+    const status = form.querySelector<HTMLElement>('[data-contact-status]');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+      const name = String(data.get('name') ?? '');
+      const email = String(data.get('email') ?? '');
+      const subject = String(data.get('subject') ?? '');
+      const message = String(data.get('message') ?? '');
+
+      const to = form.dataset.to || '';
+      const body = `${message}\n\n— ${name} (${email})`;
+      const mailto = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+      if (status) status.classList.remove('hidden');
+      window.location.href = mailto;
+    });
+  }
+
+  initContactForm();
+  document.addEventListener('astro:page-load', initContactForm);
+</script>

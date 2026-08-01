@@ -1,0 +1,32 @@
+kind: event
+title:
+  en: "Queima das Fitas (University Graduation Festival) - NOVA FCT"
+  pt: "Queima das Fitas - NOVA FCT"
+description:
+  en: "An afternoon of ribbons, crowds, and smiles, captured amidst the capes and tradition."
+  pt: "Uma tarde de fitas, multidões e sorrisos, fotografada por entre as capas e a tradição."
+location:
+  en: "Almada, Portugal"
+  pt: "Almada, Portugal"
+date: "2025-05-11"
+order: 1
+enabled: true
+images:
+  - src: "images/photography/bencao_nova/1.jpg"
+    alt: { en: "Bride getting ready", pt: "Noiva a preparar-se" }
+    size: tall
+  - src: "images/photography/bencao_nova/4.jpg"
+    alt: { en: "First look between the couple", pt: "Primeiro olhar entre o casal" }
+    size: wide
+  - src: "images/photography/bencao_nova/6.jpg"
+    alt: { en: "Rings on the table", pt: "Alianças sobre a mesa" }
+    size: normal
+  - src: "images/photography/bencao_nova/5.jpg"
+    alt: { en: "Guests during the ceremony", pt: "Convidados durante a cerimónia" }
+    size: tall
+  - src: "images/photography/bencao_nova/3.jpg"
+    alt: { en: "The first dance", pt: "A primeira dança" }
+    size: large
+  - src: "images/photography/bencao_nova/2.jpg"
+    alt: { en: "Toast at sunset", pt: "Brinde ao pôr do sol" }
+    size: normal
