@@ -45,12 +45,12 @@ export const ui = {
     'home.title': "Stories, framed and\ncut to the beat.",
     'home.subtitle':
       'I’m {name}, a {role} working across film, photography and stop motion — from first frame to final grade.',
-    'home.cta.primary': 'Watch the reel',
-    'home.cta.secondary': 'See the work',
+    'home.cta.primary': 'Check the work',
+    'home.cta.secondary': 'Get in touch',
     'home.highlight.eyebrow': 'Now Playing',
     'home.highlight.title': 'Highlight Reel',
     'home.highlight.description':
-      'A short cut of recent favourites — interviews, short films, events and a bit of stop motion, all in one take.',
+      'Check this overview of my work and get a glimpse of the interviews, short films or stop motion I\'ve done',
     'home.disciplines.eyebrow': 'What I do',
     'home.disciplines.title': 'Four crafts, one eye',
     'home.disciplines.filming.title': 'Filming',
@@ -189,12 +189,12 @@ export const ui = {
     'home.title': 'Histórias, enquadradas\ne cortadas ao ritmo.',
     'home.subtitle':
       'Sou {name}, {role} a trabalhar em filme, fotografia e stop motion — do primeiro frame à cor final.',
-    'home.cta.primary': 'Ver o showreel',
-    'home.cta.secondary': 'Ver trabalhos',
+    'home.cta.primary': 'Ver os trabalhos',
+    'home.cta.secondary': 'Contacta-me',
     'home.highlight.eyebrow': 'A Reproduzir',
     'home.highlight.title': 'Showreel de Destaque',
     'home.highlight.description':
-      'Um corte curto com os favoritos recentes — entrevistas, curtas-metragens, eventos e um pouco de stop motion, tudo numa só sequência.',
+      'Vê este resumo geral do meu trabalho, com algumas das entrevistas, curtas-metragens ou stop motion que realizei.',
     'home.disciplines.eyebrow': 'O que faço',
     'home.disciplines.title': 'Quatro áreas, um só olhar',
     'home.disciplines.filming.title': 'Filmagem',
@@ -279,9 +279,9 @@ export const ui = {
     'about.cta.desc': 'Vamos criar algo juntos.',
 
     'contact.eyebrow': 'Contacto',
-    'contact.title': 'Contacte-me',
+    'contact.title': 'Contacta-me',
     'contact.intro':
-      'Tem um projeto em mente, ou só quer dizer olá? A minha caixa de entrada está aberta — costumo responder em poucos dias.',
+      'Tens um projeto em mente, ou só queres dizer olá? A minha caixa de entrada está aberta — costumo responder em poucos dias.',
     'contact.form.name': 'Nome',
     'contact.form.email': 'Email',
     'contact.form.subject': 'Assunto',
@@ -296,12 +296,12 @@ export const ui = {
     'footer.made': 'Construído frame a frame.',
 
     'meta.home.description':
-      'Portefólio de um cineasta e contador de histórias visuais, entre filme, fotografia e stop motion.',
+      'Portfólio de um cineasta e contador de histórias visuais, entre filme, fotografia e stop motion.',
     'meta.filming.description': 'Entrevistas, curtas-metragens e videoclipes.',
     'meta.photography.description': 'Fotografia de eventos e paisagem.',
     'meta.stopmotion.description': 'Filmes de stop motion em LEGO.',
     'meta.other.description': 'Design 3D, motion graphics e projetos de design.',
     'meta.about.description': 'Um pouco sobre quem está atrás da câmara.',
-    'meta.contact.description': 'Entre em contacto sobre um projeto.',
+    'meta.contact.description': 'Entra em contacto sobre um projeto.',
   },
 } as const;

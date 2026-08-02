@@ -9,31 +9,31 @@ order: 1
 enabled: true
 images:
   - src: "images/photography/landscape/1.jpg"
-    alt: { en: "Cliffs at sunrise", pt: "Falésias ao nascer do sol" }
+    alt: { en: "Boats", pt: "Barcos" }
     size: normal
   - src: "images/photography/landscape/2.jpg"
-    alt: { en: "Pine forest in fog", pt: "Floresta de pinheiros na neblina" }
+    alt: { en: "House among the trees", pt: "Casa no meio das árvores" }
     size: tall
   - src: "images/photography/landscape/9.jpg"
-    alt: { en: "Dune ridgeline", pt: "Linha de dunas" }
+    alt: { en: "Reek", pt: "Riacho" }
     size: wide
   - src: "images/photography/landscape/5.jpg"
-    alt: { en: "River bend at dusk", pt: "Curva do rio ao entardecer" }
+    alt: { en: "Tower", pt: "Torre" }
     size: tall
   - src: "images/photography/landscape/4.jpg"
-    alt: { en: "Storm rolling over the valley", pt: "Tempestade sobre o vale" }
+    alt: { en: "Scene from a town", pt: "Cena de uma aldeia" }
     size: large
   - src: "images/photography/landscape/8.jpg"
-    alt: { en: "Dune ridgeline", pt: "Linha de dunas" }
+    alt: { en: "Mountains", pt: "Montanhas" }
     size: normal
   - src: "images/photography/landscape/10.jpeg"
-    alt: { en: "Dune ridgeline", pt: "Linha de dunas" }
+    alt: { en: "Water on the rocks", pt: "Água nas rochas" }
     size: wide
   - src: "images/photography/landscape/7.jpg"
-    alt: { en: "Frost on the highlands", pt: "Geada nas terras altas" }
+    alt: { en: "Houses by the river", pt: "Casas ao longo de um rio" }
     size: normal
   - src: "images/photography/landscape/6.jpg"
-    alt: { en: "Lighthouse, long exposure", pt: "Farol, longa exposição" }
+    alt: { en: "Mountains", pt: "Montanhas" }
     size: normal
 
 

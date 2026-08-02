@@ -83,7 +83,7 @@ const disciplines = [
 const stats = [
   { value: '7+', label: t('home.stats.years') },
   { value: '10+', label: t('home.stats.projects') },
-  { value: '3', label: t('home.stats.events') },
+  { value: '6', label: t('home.stats.events') },
   { value: '120K+', label: t('home.stats.frames') },
 ];
 ---
@@ -106,16 +106,16 @@ const stats = [
       </p>
       <div class="mt-9 flex flex-wrap items-center gap-4">
         <a
-          href="#highlight"
-          class="inline-flex items-center gap-2 rounded bg-amber-500 px-5 py-3 timecode text-ink-950 transition-colors hover:bg-amber-400"
+          href="#work"
+          class="nav-underline inline-flex items-center gap-2 px-1 py-3 timecode text-paper-200 hover:text-paper-100"
         >
           {t('home.cta.primary')}
         </a>
         <a
-          href="#work"
-          class="nav-underline inline-flex items-center gap-2 px-1 py-3 timecode text-paper-200 hover:text-paper-100"
+          href="#highlight"
+          class="inline-flex items-center gap-2 rounded bg-amber-500 px-5 py-3 timecode text-ink-950 transition-colors hover:bg-amber-400"
         >
-          {t('home.cta.secondary')}
+          {t('home.cta.primary')}
         </a>
       </div>
     </div>
