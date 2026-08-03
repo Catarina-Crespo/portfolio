@@ -6,7 +6,8 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://example.com',
+  site: 'https://catarina-crespo.github.io/portfolio/',
+  base: 'portfolio',
   integrations: [react()],
 
   i18n: {
