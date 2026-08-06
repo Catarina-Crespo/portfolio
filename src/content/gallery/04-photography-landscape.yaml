@@ -1,0 +1,4 @@
+src: "https://picsum.photos/seed/land-04/900/900"
+alt: { en: "Storm rolling over a valley", pt: "Tempestade sobre um vale" }
+order: 4
+enabled: true

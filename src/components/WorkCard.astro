@@ -10,6 +10,7 @@ interface Props {
   thumbnail?: string;
   image?: string; // for static-image works (e.g. design projects)
   playLabel: string;
+  fullscreenLabel?: string;
   comingSoonLabel?: string;
   aspect?: 'video' | 'portrait' | 'shorts' | 'square';
   class?: string;
@@ -23,6 +24,7 @@ const {
   thumbnail,
   image,
   playLabel,
+  fullscreenLabel,
   comingSoonLabel,
   aspect = 'video',
   class: className = '',
@@ -44,7 +46,7 @@ const imageAspectClass =
         />
       </div>
     ) : (
-      <VideoPlayer client:visible videoUrl={videoUrl} thumbnail={thumbnail} title={title} playLabel={playLabel} aspect={aspect} />
+      <VideoPlayer client:visible videoUrl={videoUrl} thumbnail={thumbnail} title={title} playLabel={playLabel} fullscreenLabel={fullscreenLabel} aspect={aspect} />
     )}
     <span class="timecode absolute left-3 top-3 rounded bg-ink-950/70 px-2 py-1 text-paper-300 backdrop-blur-sm">
       {code}

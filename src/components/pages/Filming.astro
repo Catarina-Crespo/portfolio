@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import { useTranslations, type Lang } from '../../i18n/utils';
-import SectionHeading from '../SectionHeading.astro';
+import PageIntro from '../PageIntro.astro';
 import WorkCard from '../WorkCard.astro';
 import { catalogCode } from '../../utils/catalog';
 
@@ -18,12 +18,10 @@ const shortFilms = all.filter((i) => i.data.category === 'short-film').sort((a, 
 const videoclips = all.filter((i) => i.data.category === 'videoclip').sort((a, b) => a.data.order - b.data.order);
 ---
 
-<section class="mx-auto max-w-7xl px-5 md:px-8 pt-16 pb-10">
-  <SectionHeading eyebrow={t('filming.eyebrow')} title={t('filming.title')} description={t('filming.intro')} />
-</section>
+<PageIntro eyebrow={t('filming.eyebrow')} title={t('filming.title')} description={t('filming.intro')} />
 
 {interviews.length > 0 && (
-  <section class="mx-auto max-w-7xl px-5 md:px-8 py-10">
+  <section class="mx-auto max-w-7xl px-5 md:px-8 pt-8 pb-10">
     <div class="flex items-end justify-between gap-6 mb-10" data-reveal>
       <div>
         <h3 class="font-display text-2xl font-semibold text-paper-100">{t('filming.interviews.title')}</h3>
@@ -40,6 +38,7 @@ const videoclips = all.filter((i) => i.data.category === 'videoclip').sort((a, b
           videoUrl={item.data.videoUrl}
           thumbnail={item.data.thumbnail}
           playLabel={t('common.play')}
+          fullscreenLabel={t('common.fullscreen')}
         />
       ))}
     </div>
@@ -64,6 +63,7 @@ const videoclips = all.filter((i) => i.data.category === 'videoclip').sort((a, b
           videoUrl={item.data.videoUrl}
           thumbnail={item.data.thumbnail}
           playLabel={t('common.play')}
+          fullscreenLabel={t('common.fullscreen')}
         />
       ))}
     </div>
@@ -88,6 +88,7 @@ const videoclips = all.filter((i) => i.data.category === 'videoclip').sort((a, b
           videoUrl={item.data.videoUrl}
           thumbnail={item.data.thumbnail}
           playLabel={t('common.play')}
+          fullscreenLabel={t('common.fullscreen')}
           aspect="portrait"
         />
       ))}

@@ -4,6 +4,7 @@ import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import Background from '../components/Background.astro';
 import CustomCursor from '../components/CustomCursor.astro';
+import BackToTop from '../components/BackToTop.astro';
 import { site } from '../config/site';
 import type { Lang } from '../i18n/utils';
 import '../styles/global.css';
@@ -37,6 +38,7 @@ const pageTitle = `${title} — ${site.name}`;
       href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 
     <ClientRouter />
   </head>
@@ -48,6 +50,7 @@ const pageTitle = `${title} — ${site.name}`;
       <slot />
     </main>
     <Footer lang={lang} />
+    <BackToTop lang={lang} />
     <script src="../scripts/reveal.ts"></script>
     <script src="../scripts/cursor.ts"></script>
   </body>

@@ -1,0 +1,4 @@
+src: "https://picsum.photos/seed/fest-01/900/900"
+alt: { en: "Headliner under stage lights", pt: "Cabeça de cartaz sob as luzes do palco" }
+order: 7
+enabled: true

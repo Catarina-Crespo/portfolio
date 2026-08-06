@@ -1,0 +1,55 @@
+---
+import { useTranslations, type Lang } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<button
+  id="back-to-top"
+  type="button"
+  aria-label={t('common.backToTop')}
+  title={t('common.backToTop')}
+  class="fixed bottom-6 right-5 z-40 flex h-11 w-11 translate-y-3 items-center justify-center rounded-full border border-ink-700 bg-ink-950/80 text-paper-100 opacity-0 backdrop-blur-sm transition-all duration-300 pointer-events-none hover:border-amber-500 hover:text-amber-500 sm:right-8"
+>
+  <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M12 19V5M5 12l7-7 7 7" />
+  </svg>
+</button>
+
+<script>
+  function initBackToTop() {
+    const btn = document.getElementById('back-to-top');
+    if (!btn) return;
+
+    const setVisible = (visible: boolean) => {
+      btn.classList.toggle('opacity-0', !visible);
+      btn.classList.toggle('translate-y-3', !visible);
+      btn.classList.toggle('pointer-events-none', !visible);
+    };
+
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        setVisible(window.scrollY > window.innerHeight * 0.6);
+        ticking = false;
+      });
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    btn.addEventListener('click', () => {
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      window.scrollTo({ top: 0, behavior: reducedMotion ? 'auto' : 'smooth' });
+    });
+  }
+
+  initBackToTop();
+  document.addEventListener('astro:page-load', initBackToTop);
+</script>

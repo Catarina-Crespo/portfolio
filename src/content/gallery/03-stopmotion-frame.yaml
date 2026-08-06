@@ -1,0 +1,4 @@
+src: "https://picsum.photos/seed/gallery-stopmotion-01/900/900"
+alt: { en: "Frame from a LEGO stop-motion set", pt: "Frame de um set de stop motion em LEGO" }
+order: 3
+enabled: true

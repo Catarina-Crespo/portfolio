@@ -1,6 +1,7 @@
 ---
 import { useTranslations, type Lang } from '../../i18n/utils';
 import { site } from '../../config/site';
+import SocialIcon from '../icons/SocialIcon.astro';
 
 interface Props {
   lang: Lang;
@@ -9,6 +10,19 @@ const { lang } = Astro.props;
 const t = useTranslations(lang);
 
 const socials = Object.entries(site.socials).filter(([, url]) => url);
+
+// Add/remove/reorder project types here — each just needs a stable
+// `value` and a translation key under contact.form.projectTypes.* in
+// src/i18n/ui.ts.
+const projectTypes = [
+  'photography',
+  'filming',
+  'editing',
+  'stopmotion',
+  'motiongraphics',
+  '3ddesign',
+  'other',
+] as const;
 ---
 
 <section class="mx-auto max-w-7xl px-5 md:px-8 pt-16 pb-24">
@@ -22,7 +36,14 @@ const socials = Object.entries(site.socials).filter(([, url]) => url);
   </div>
 
   <div class="mt-14 grid gap-10 lg:grid-cols-[1.3fr_1fr]">
-    <form data-contact-form data-to={site.email} class="slate-frame rounded-[var(--radius-card)] border border-ink-700 bg-ink-900/50 p-6 sm:p-8 space-y-5" data-reveal data-reveal-delay="80">
+    <form
+      data-contact-form
+      action={site.contactFormEndpoint}
+      method="POST"
+      class="slate-frame rounded-[var(--radius-card)] border border-ink-700 bg-ink-900/50 p-6 sm:p-8 space-y-5"
+      data-reveal
+      data-reveal-delay="80"
+    >
       <div class="grid gap-5 sm:grid-cols-2">
         <label class="block">
           <span class="timecode text-paper-400">{t('contact.form.name')}</span>
@@ -43,6 +64,26 @@ const socials = Object.entries(site.socials).filter(([, url]) => url);
           />
         </label>
       </div>
+
+      <label class="block">
+        <span class="timecode text-paper-400">{t('contact.form.projectType')}</span>
+        <div class="relative mt-2">
+          <select
+            name="projectType"
+            required
+            class="w-full appearance-none rounded border border-ink-700 bg-ink-950/60 px-3.5 py-2.5 pr-9 text-paper-100 outline-none transition-colors focus:border-amber-500"
+          >
+            <option value="" selected disabled>{t('contact.form.projectTypePlaceholder')}</option>
+            {projectTypes.map((key) => (
+              <option value={key}>{t(`contact.form.projectTypes.${key}` as any)}</option>
+            ))}
+          </select>
+          <svg viewBox="0 0 24 24" class="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 fill-none stroke-paper-400" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </div>
+      </label>
+
       <label class="block">
         <span class="timecode text-paper-400">{t('contact.form.subject')}</span>
         <input
@@ -61,18 +102,17 @@ const socials = Object.entries(site.socials).filter(([, url]) => url);
           class="mt-2 w-full rounded border border-ink-700 bg-ink-950/60 px-3.5 py-2.5 text-paper-100 outline-none transition-colors focus:border-amber-500"
         ></textarea>
       </label>
-      <button
-        type="submit"
-        class="inline-flex items-center gap-2 rounded bg-amber-500 px-6 py-3 timecode text-ink-950 transition-colors hover:bg-amber-400"
-      >
-        {t('contact.form.submit')}
-      </button>
-      <p data-contact-status class="timecode text-paper-400 hidden">{t('contact.form.sending')}</p>
-      <p class="text-xs text-paper-400 leading-relaxed pt-2">
-        {/* This form opens the visitor's email client with the message pre-filled —
-        no backend required. Swap in Formspree / Netlify Forms / etc. for a
-        fully in-page submission if you'd prefer. */}
-      </p>
+
+      <div class="flex items-center gap-4">
+        <button
+          type="submit"
+          data-contact-submit
+          class="inline-flex items-center gap-2 rounded bg-amber-500 px-6 py-3 timecode text-ink-950 transition-colors hover:bg-amber-400 disabled:opacity-60"
+        >
+          <span data-submit-label>{t('contact.form.submit')}</span>
+        </button>
+        <p data-contact-status role="status" class="timecode hidden"></p>
+      </div>
     </form>
 
     <div class="space-y-6" data-reveal data-reveal-delay="140">
@@ -88,7 +128,8 @@ const socials = Object.entries(site.socials).filter(([, url]) => url);
           <ul class="space-y-2">
             {socials.map(([name, url]) => (
               <li>
-                <a href={url} target="_blank" rel="noopener noreferrer" class="capitalize text-paper-300 hover:text-amber-400 transition-colors">
+                <a href={url} target="_blank" rel="noopener noreferrer" class="flex items-center gap-2.5 capitalize text-paper-300 hover:text-amber-400 transition-colors">
+                  <SocialIcon name={name} class="h-4 w-4" />
                   {name}
                 </a>
               </li>
@@ -105,26 +146,52 @@ const socials = Object.entries(site.socials).filter(([, url]) => url);
   </div>
 </section>
 
-<script>
+<script define:vars={{ sendingLabel: t('contact.form.sending'), submitLabel: t('contact.form.submit'), successMsg: t('contact.form.success'), errorMsg: t('contact.form.error') }}>
   function initContactForm() {
-    const form = document.querySelector<HTMLFormElement>('[data-contact-form]');
+    const form = document.querySelector('[data-contact-form]');
     if (!form) return;
-    const status = form.querySelector<HTMLElement>('[data-contact-status]');
+    const submitBtn = form.querySelector('[data-contact-submit]');
+    const submitLabelEl = form.querySelector('[data-submit-label]');
+    const status = form.querySelector('[data-contact-status]');
 
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const data = new FormData(form);
-      const name = String(data.get('name') ?? '');
-      const email = String(data.get('email') ?? '');
-      const subject = String(data.get('subject') ?? '');
-      const message = String(data.get('message') ?? '');
+      if (submitBtn.disabled) return;
 
-      const to = form.dataset.to || '';
-      const body = `${message}\n\n— ${name} (${email})`;
-      const mailto = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      submitBtn.disabled = true;
+      if (submitLabelEl) submitLabelEl.textContent = sendingLabel;
+      if (status) {
+        status.classList.add('hidden');
+        status.classList.remove('text-amber-500', 'text-rec-500');
+      }
 
-      if (status) status.classList.remove('hidden');
-      window.location.href = mailto;
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { Accept: 'application/json' },
+        });
+
+        if (response.ok) {
+          form.reset();
+          if (status) {
+            status.textContent = successMsg;
+            status.classList.remove('hidden');
+            status.classList.add('text-amber-500');
+          }
+        } else {
+          throw new Error('Form submission failed');
+        }
+      } catch {
+        if (status) {
+          status.textContent = errorMsg;
+          status.classList.remove('hidden');
+          status.classList.add('text-rec-500');
+        }
+      } finally {
+        submitBtn.disabled = false;
+        if (submitLabelEl) submitLabelEl.textContent = submitLabel;
+      }
     });
   }
 

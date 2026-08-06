@@ -3,9 +3,10 @@ import { getCollection } from 'astro:content';
 import { useTranslations, localizePath, type Lang } from '../../i18n/utils';
 import SectionHeading from '../SectionHeading.astro';
 import WorkCard from '../WorkCard.astro';
-import VideoPlayer from '../react/VideoPlayer.tsx';
+import BackgroundVideo from '../BackgroundVideo.astro';
 import { site } from '../../config/site';
 import TestimonialCard from '../TestimonialCard.astro';
+import GalleryTile from '../GalleryTile.astro';
 
 interface Props {
   lang: Lang;
@@ -18,6 +19,14 @@ const filmingAll = (await getCollection('filming')).filter((i) => i.data.enabled
 const stopmotionAll = (await getCollection('stopmotion')).filter((i) => i.data.enabled);
 const otherAll = (await getCollection('other')).filter((i) => i.data.enabled);
 const testimonials = (await getCollection('testimonials'))
+  .filter((i) => i.data.enabled)
+  .sort((a, b) => a.data.order - b.data.order);
+
+// Master switch for the homepage gallery strip below — flip to false to
+// hide it outright regardless of content. It also hides itself
+// automatically if every image in src/content/gallery/ is disabled.
+const galleryEnabled = false;
+const galleryItems = (await getCollection('gallery'))
   .filter((i) => i.data.enabled)
   .sort((a, b) => a.data.order - b.data.order);
 
@@ -81,70 +90,89 @@ const disciplines = [
 
 // Edit these freely — just placeholder numbers.
 const stats = [
-  { value: '7+', label: t('home.stats.years') },
-  { value: '10+', label: t('home.stats.projects') },
-  { value: '6', label: t('home.stats.events') },
+  { value: '6+', label: t('home.stats.years') },
+  { value: '80+', label: t('home.stats.projects') },
+  { value: '35+', label: t('home.stats.events') },
   { value: '120K+', label: t('home.stats.frames') },
 ];
+
+// Rotates through these in the hero's scramble-text headline
+// ("I work with ___") — add, remove or reorder freely.
+const heroWords = [
+  { en: 'Photography', pt: 'Fotografia' },
+  { en: 'Filming', pt: 'Filmagem' },
+  { en: 'Editing', pt: 'Edição' },
+  { en: 'Stop Motion', pt: 'Stop Motion' },
+  { en: 'Motion Graphics', pt: 'Motion Graphics' },
+  { en: '3D Design', pt: 'Design 3D' },
+];
+const heroWordsLocalized = heroWords.map((w) => w[lang]);
 ---
 
-<!-- HERO -->
-<section class="mx-auto max-w-7xl px-5 md:px-8 pt-14 pb-20 lg:pt-20 lg:pb-28">
-  <div class="grid gap-14 lg:grid-cols-[1.1fr_1fr] lg:items-center">
-    <div data-reveal>
-      <p class="timecode text-amber-500 mb-5 flex items-center gap-2">
-        <span class="rec-dot"></span>
-        {t('home.eyebrow')}
+<!-- FULLSCREEN VIDEO HERO -->
+<section id="highlight" class="relative h-[100svh] min-h-[560px] w-full overflow-hidden -mt-[57px]">
+  {highlight && (
+    <BackgroundVideo
+      videoUrl="images/intro.mp4"
+      thumbnail={highlight.data.thumbnail}
+      title={highlight.data.title[lang]}
+      class="absolute inset-0"
+    />
+  )}
+
+  <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/55 to-ink-950/10"></div>
+
+  <div class="absolute inset-x-0 bottom-0 px-5 pb-24 pt-32 sm:px-10 sm:pb-28">
+    <div class="mx-auto max-w-7xl">
+      <p class="timecode mb-3 flex items-center gap-2 text-paper-300" data-reveal>
+        <span class="h-px w-6 bg-amber-500/70"></span>
+        {t('home.hero.greeting', { name: site.name })}
       </p>
-      <h1 class="font-display text-4xl sm:text-5xl xl:text-6xl font-semibold leading-[1.05] text-paper-100">
-        {t('home.title').split('\n').map((line) => (
-          <span class="block">{line}</span>
-        ))}
+      <h1
+        class="font-display text-4xl font-semibold leading-[1.1] text-paper-100 sm:text-5xl xl:text-6xl"
+        data-reveal
+        data-reveal-delay="80"
+      >
+        <span class="block">{t('home.hero.headline1')}</span>
+        <span class="block">
+          {t('home.hero.headline2')}{' '}
+          <span class="font-mono text-amber-500" data-scramble data-scramble-words={JSON.stringify(heroWordsLocalized)} aria-hidden="true">
+            {heroWordsLocalized[0]}
+          </span>.
+        </span>
+        <span class="sr-only">{heroWordsLocalized.join(', ')}</span>
       </h1>
-      <p class="mt-6 max-w-md text-lg text-paper-300 leading-relaxed">
-        {t('home.subtitle', { name: site.name, role: lang === 'en' ? site.role.en : site.role.pt })}
-      </p>
-      <div class="mt-9 flex flex-wrap items-center gap-4">
+      <div class="mt-9 flex flex-wrap items-center gap-4" data-reveal data-reveal-delay="160">
         <a
           href="#work"
-          class="nav-underline inline-flex items-center gap-2 px-1 py-3 timecode text-paper-200 hover:text-paper-100"
-        >
-          {t('home.cta.primary')}
-        </a>
-        <a
-          href="#highlight"
           class="inline-flex items-center gap-2 rounded bg-amber-500 px-5 py-3 timecode text-ink-950 transition-colors hover:bg-amber-400"
         >
           {t('home.cta.primary')}
         </a>
+        <a
+          href={L('/contact')}
+          class="nav-underline inline-flex items-center gap-2 px-1 py-3 timecode text-paper-200 hover:text-paper-100"
+        >
+          {t('common.getInTouch')}
+        </a>
       </div>
-    </div>
-
-    <div id="highlight" class="scroll-mt-24" data-reveal data-reveal-delay="120">
-      <div class="mb-3 flex items-center justify-between">
-        <p class="timecode text-paper-400 flex items-center gap-2">
-          <span class="rec-dot"></span>
-          {t('home.highlight.eyebrow')}
-        </p>
-      </div>
-      {highlight && (
-        <VideoPlayer
-          client:visible
-          videoUrl={highlight.data.videoUrl}
-          thumbnail={highlight.data.thumbnail}
-          title={highlight.data.title[lang]}
-          playLabel={t('common.play')}
-          aspect="video"
-        />
-      )}
-      <h2 class="mt-4 font-display text-xl font-semibold text-paper-100">{t('home.highlight.title')}</h2>
-      <p class="mt-1.5 text-sm text-paper-400 leading-relaxed max-w-md">{t('home.highlight.description')}</p>
     </div>
   </div>
+
+  <a
+    href="#stats"
+    class="absolute bottom-5 left-1/2 flex -translate-x-1/2 flex-col items-center gap-1.5 text-paper-300 transition-colors hover:text-amber-400"
+    aria-label={t('common.scrollDown')}
+  >
+    <span class="timecode">{t('common.scrollDown')}</span>
+    <svg viewBox="0 0 24 24" class="h-4 w-4 animate-bounce fill-none stroke-current" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M6 9l6 6 6-6" />
+    </svg>
+  </a>
 </section>
 
 <!-- STATS -->
-<section class="border-y border-ink-700/70 bg-ink-900/40">
+<section id="stats" class="border-y border-ink-700/70 bg-ink-900/40 scroll-mt-[57px]">
   <div class="mx-auto max-w-7xl px-5 md:px-8 py-10 grid grid-cols-2 gap-8 lg:grid-cols-4" data-reveal>
     {stats.map((s) => (
       <div>
@@ -176,6 +204,26 @@ const stats = [
   </div>
 </section>
 
+<!-- GALLERY -->
+{galleryEnabled && galleryItems.length > 0 && (
+  <section class="py-20 lg:py-28">
+    <div class="mx-auto max-w-7xl px-5 md:px-8">
+      <SectionHeading eyebrow={t('home.gallery.eyebrow')} title={t('home.gallery.title')} />
+    </div>
+    <div class="marquee mt-12" data-reveal>
+      <div class="marquee-track" style={`animation-duration:${galleryItems.length * 4}s`}>
+        {galleryItems.map((item) => (
+          <GalleryTile src={item.data.src} alt={item.data.alt?.[lang] ?? ''} />
+        ))}
+        {/* Duplicate set, hidden from assistive tech, closes the loop seamlessly at -50%. */}
+        {galleryItems.map((item) => (
+          <GalleryTile src={item.data.src} alt={item.data.alt?.[lang] ?? ''} ariaHidden />
+        ))}
+      </div>
+    </div>
+  </section>
+)}
+
 <!-- SELECTED WORK -->
 <section id="work" class="mx-auto max-w-7xl px-5 md:px-8 py-20 lg:py-28 scroll-mt-20">
   <div class="flex flex-wrap items-end justify-between gap-6">
@@ -195,6 +243,7 @@ const stats = [
           videoUrl={w.videoUrl}
           thumbnail={w.thumbnail}
           playLabel={t('common.play')}
+          fullscreenLabel={t('common.fullscreen')}
         />
       </a>
     ))}
@@ -240,7 +289,10 @@ const stats = [
     class="slate-frame relative overflow-hidden rounded-[var(--radius-card)] border border-ink-700 bg-ink-900/60 px-8 py-14 sm:px-14 text-center"
     data-reveal
   >
-    <p class="timecode text-amber-500 mb-4">{t('home.eyebrow')}</p>
+    <p class="timecode mb-4 flex items-center justify-center gap-2 text-amber-500">
+      <span class="h-px w-6 bg-amber-500/70"></span>
+      {t('home.eyebrow')}
+    </p>
     <h2 class="font-display text-3xl sm:text-4xl font-semibold text-paper-100">{t('home.cta.footer.title')}</h2>
     <p class="mt-4 text-paper-300 max-w-lg mx-auto">{t('home.cta.footer.desc')}</p>
     <a
@@ -251,3 +303,5 @@ const stats = [
     </a>
   </div>
 </section>
+
+<script src="../../scripts/scramble.ts"></script>

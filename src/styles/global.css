@@ -31,12 +31,12 @@
 
   --color-cyan-400: #55c9b6;  /* secondary accent — used sparingly */
 
-  --color-rec-500: #c1432b;   /* record-dot red — icon use only, not a UI color */
+  --color-rec-500: #c1432b;   /* error/warning states (e.g. contact form) */
 
   /* --- Type --- */
   --font-display: "Space Grotesk", "Arial Narrow", sans-serif;
   --font-body: "IBM Plex Sans", "Helvetica Neue", sans-serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --font-mono: "Inter", ui-monospace, monospace;
 
   /* --- Radius: soft but not bubbly --- */
   --radius-card: 0.375rem;
@@ -150,7 +150,7 @@ h1, h2, h3, h4 {
   height: 30rem;
   bottom: -12rem;
   right: -6rem;
-  background: var(--color-cyan-400);
+  background: var(--color-amber-600);
   opacity: 0.14;
   animation-duration: 55s;
   animation-direction: alternate-reverse;
@@ -163,41 +163,36 @@ h1, h2, h3, h4 {
 
 /* ============================================================
    SIGNATURE COMPONENT: the "slate frame"
-   Borrowed from a camera viewfinder / clapperboard: thin corner
-   brackets + a mono catalog code. Used to frame hero media and
-   every work card so film, photo and stop-motion share one language.
+   Borrowed from a camera viewfinder / clapperboard: thin top-left +
+   bottom-right corner brackets. Used to frame hero media and every
+   work card so film, photo and stop-motion share one language.
+   z-index:2 is required, not decorative — without it, sibling overlays
+   (e.g. VideoPlayer's darkening gradient, which brightens on hover)
+   paint on top of these brackets and hide them, since same-stacking-
+   level positioned elements stack by DOM order, not by who's "meant"
+   to be on top.
    ============================================================ */
 .slate-frame {
   position: relative;
 }
-.slate-frame::before,
-.slate-frame::after {
+.slate-frame::before {
   content: "";
   position: absolute;
-  width: 1.25rem;
-  height: 1.25rem;
-  opacity: 0.85;
-  transition: width 0.35s var(--ease-lens), height 0.35s var(--ease-lens);
+  inset: -1px;
+  z-index: 2;
   pointer-events: none;
-}
-.slate-frame::before {
-  top: -1px;
-  left: -1px;
-  border-top: 2px solid var(--color-amber-500);
-  border-left: 2px solid var(--color-amber-500);
-}
-.slate-frame::after {
-  bottom: -1px;
-  right: -1px;
-  border-bottom: 2px solid var(--color-amber-500);
-  border-right: 2px solid var(--color-amber-500);
-}
-.slate-frame:hover::before,
-.slate-frame:hover::after,
-.slate-frame:focus-within::before,
-.slate-frame:focus-within::after {
-  width: 1.75rem;
-  height: 1.75rem;
+  background-repeat: no-repeat;
+  background-image:
+    linear-gradient(var(--color-amber-500), var(--color-amber-500)),
+    linear-gradient(var(--color-amber-500), var(--color-amber-500)),
+    linear-gradient(var(--color-amber-500), var(--color-amber-500)),
+    linear-gradient(var(--color-amber-500), var(--color-amber-500));
+  background-size:
+    18px 2px, 2px 18px,
+    18px 2px, 2px 18px;
+  background-position:
+    top left, top left,
+    bottom right, bottom right;
 }
 
 .timecode {
@@ -205,20 +200,6 @@ h1, h2, h3, h4 {
   letter-spacing: 0.14em;
   text-transform: uppercase;
   font-size: 0.75rem;
-}
-
-.rec-dot {
-  display: inline-block;
-  width: 0.5rem;
-  height: 0.5rem;
-  border-radius: 50%;
-  background: var(--color-rec-500);
-  animation: rec-pulse 2s infinite;
-}
-@keyframes rec-pulse {
-  0% { box-shadow: 0 0 0 0 rgba(193, 67, 43, 0.55); }
-  70% { box-shadow: 0 0 0 6px rgba(193, 67, 43, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(193, 67, 43, 0); }
 }
 
 /* ============================================================
@@ -290,13 +271,23 @@ html.has-custom-cursor label {
 }
 [data-reveal].is-visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: none;
 }
 @media (prefers-reduced-motion: reduce) {
   [data-reveal] {
     opacity: 1;
     transform: none;
   }
+}
+
+/* ============================================================
+   SCRAMBLE TEXT (homepage hero headline)
+   See src/scripts/scramble.ts. Settled characters inherit the parent's
+   color; still-scrambling ones render dimmer so the "decode" read is
+   visible at a glance.
+   ============================================================ */
+.scramble-char {
+  opacity: 0.45;
 }
 
 /* ============================================================
@@ -328,6 +319,91 @@ html.has-custom-cursor label {
 .nav-underline:hover::after,
 .nav-underline[aria-current="page"]::after {
   right: 0;
+}
+
+/* ============================================================
+   NAV BOX — hover effect for the header nav links
+   A rectangle draws itself around the link on hover: the top/bottom
+   bars (on the <a>) and the left/right bars (on the inner <span>)
+   grow in sequence via staggered transition-delay, tracing one
+   continuous path around the text — then reverses on mouse-out.
+   Markup needed: <a class="nav-box"><span>Label</span></a>
+   ============================================================ */
+.nav-box {
+  position: relative;
+  display: inline-block;
+}
+.nav-box > span {
+  display: block;
+  position: relative;
+  /* Padding lives here, not on .nav-box: the horizontal bars below size
+     themselves to 100% of .nav-box's box, and the vertical bars size to
+     100% of this span's box — if the two elements had different padding,
+     those two "100%"s would be different widths and the corners
+     wouldn't meet. Keeping .nav-box itself padding-free means it
+     shrink-wraps to exactly this span's outer size, so both pairs of
+     bars always measure the same box. */
+  padding: 0.4rem 0.5rem;
+}
+
+.nav-box::before,
+.nav-box::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 1.5px;
+  background: var(--color-amber-500);
+  transition: width 0.2s linear 0.2s;
+  pointer-events: none;
+}
+.nav-box::before {
+  top: 0;
+  right: 0;
+}
+.nav-box::after {
+  bottom: 0;
+  left: 0;
+}
+
+.nav-box > span::before,
+.nav-box > span::after {
+  content: "";
+  position: absolute;
+  width: 1.5px;
+  height: 0;
+  background: var(--color-amber-500);
+  transition: height 0.2s linear 0s;
+  pointer-events: none;
+}
+.nav-box > span::before {
+  top: 0;
+  left: 0;
+}
+.nav-box > span::after {
+  bottom: 0;
+  right: 0;
+}
+
+.nav-box:hover::before,
+.nav-box:hover::after,
+.nav-box[aria-current="page"]::before,
+.nav-box[aria-current="page"]::after {
+  width: 100%;
+  transition-delay: 0s;
+}
+.nav-box:hover > span::before,
+.nav-box:hover > span::after,
+.nav-box[aria-current="page"] > span::before,
+.nav-box[aria-current="page"] > span::after {
+  height: 100%;
+  transition-delay: 0.2s;
+}
+
+.nav-box[aria-current="page"]::before,
+.nav-box[aria-current="page"]::after,
+.nav-box[aria-current="page"] > span::before,
+.nav-box[aria-current="page"] > span::after {
+  background-color: var(--color-paper-100);
 }
 
 .mosaic {

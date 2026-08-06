@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 
 export interface MosaicImage {
   src: string;
@@ -71,7 +72,7 @@ export default function PhotoMosaic({ images, closeLabel, prevLabel, nextLabel }
         ))}
       </div>
 
-      {active && (
+      {active && createPortal(
         <div
           className="fixed inset-0 z-[100] flex items-center justify-center bg-ink-950/95 backdrop-blur-sm p-4 sm:p-8"
           role="dialog"
@@ -119,7 +120,8 @@ export default function PhotoMosaic({ images, closeLabel, prevLabel, nextLabel }
           <p className="absolute bottom-4 sm:bottom-6 timecode text-paper-400">
             {String(activeIndex! + 1).padStart(2, '0')} / {String(images.length).padStart(2, '0')}
           </p>
-        </div>
+        </div>,
+        document.body,
       )}
     </>
   );

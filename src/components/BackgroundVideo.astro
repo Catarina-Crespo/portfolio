@@ -1,0 +1,42 @@
+---
+import { getVideoProvider, getBackgroundEmbedUrl, getAutoThumbnail } from '../utils/media';
+
+interface Props {
+  videoUrl?: string;
+  thumbnail?: string;
+  title: string;
+  class?: string;
+}
+const { videoUrl, thumbnail, title, class: className = '' } = Astro.props;
+
+const provider = videoUrl ? getVideoProvider(videoUrl) : 'unknown';
+const embedUrl = videoUrl ? getBackgroundEmbedUrl(videoUrl) : null;
+const poster = thumbnail || (videoUrl ? getAutoThumbnail(videoUrl) : null);
+---
+
+<div class={`h-full w-full overflow-hidden bg-ink-900 ${className}`} aria-hidden="true">
+  {embedUrl ? (
+    <iframe
+      src={embedUrl}
+      title={title}
+      class="pointer-events-none absolute inset-0 h-full w-full"
+      allow="autoplay; encrypted-media"
+      tabindex="-1"
+    />
+  ) : provider === 'file' && videoUrl ? (
+    <video
+      src={videoUrl}
+      poster={poster ?? undefined}
+      class="pointer-events-none absolute inset-0 h-full w-full object-cover"
+      autoplay
+      muted
+      loop
+      playsinline
+      tabindex="-1"
+    />
+  ) : poster ? (
+    <img src={poster} alt="" class="absolute inset-0 h-full w-full object-cover" />
+  ) : (
+    <div class="absolute inset-0 bg-gradient-to-br from-ink-800 to-ink-900" />
+  )}
+</div>

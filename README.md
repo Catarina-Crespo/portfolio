@@ -108,6 +108,23 @@ order: 1
 enabled: true
 ```
 
+### Gallery — `src/content/gallery/*.yaml`
+An auto-scrolling strip of stills on the homepage — mix in whatever's a
+good look: a frame from a video, an event photo, a stop-motion shot, a
+render, anything. One file per image:
+```yaml
+src: "/images/gallery/01.jpg"    # or any external URL
+alt:                              # optional
+  en: "..."
+  pt: "..."
+order: 1
+enabled: true
+```
+To turn the whole section off, either set `galleryEnabled = false` near
+the top of `src/components/pages/Home.astro`, or just disable/delete every
+file in this folder — same trick as the Videoclips/Design Projects
+sections, it hides itself automatically once there's nothing enabled.
+
 ## Custom cursor
 
 Desktop/trackpad visitors get a small "viewfinder" cursor (corner brackets
@@ -189,10 +206,25 @@ src/
 
 ## Contact form
 
-The contact form builds a `mailto:` link client-side (no backend needed) —
-see the `<script>` at the bottom of `src/components/pages/Contact.astro`.
-If you'd rather have real in-page submissions, swap it for a service like
-Formspree, Getform, or Netlify Forms (a few lines in that same file).
+The form submits directly to [Formspree](https://formspree.io) — free (50
+submissions/month), no backend, no server code of your own required.
+
+**To wire up your own inbox:**
+1. Sign up free at [formspree.io](https://formspree.io) and create a form.
+2. Copy the endpoint it gives you (`https://formspree.io/f/xxxxxxxx`).
+3. Paste it into `contactFormEndpoint` in `src/config/site.ts`.
+
+That's it — submissions arrive by email (and in your Formspree dashboard).
+The form itself uses `fetch()` to submit in the background and show an
+inline "message sent" state (see the `<script>` at the bottom of
+`src/components/pages/Contact.astro`); if JavaScript is unavailable it
+still works as a plain form POST, Formspree just shows its own
+confirmation page instead.
+
+The "Project type" dropdown options live in the `projectTypes` array near
+the top of that same file — add/remove/reorder entries there, and give
+each a matching translation under `contact.form.projectTypes.*` in
+`src/i18n/ui.ts`.
 
 ## Deploying
 

@@ -1,0 +1,4 @@
+src: "https://picsum.photos/seed/gallery-3d-01/900/900"
+alt: { en: "3D render, work in progress", pt: "Render 3D, trabalho em progresso" }
+order: 5
+enabled: true

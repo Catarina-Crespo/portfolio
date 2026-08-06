@@ -1,0 +1,4 @@
+src: "https://picsum.photos/seed/gallery-filming-01/900/900"
+alt: { en: "Still from a short film shoot", pt: "Still de uma rodagem de curta-metragem" }
+order: 1
+enabled: true

@@ -1,7 +1,7 @@
 ---
 category: short-film
 title:
-  en: "3:33 AM"
+  en: "3:33"
   pt: "3:33"
 description:
   en: "A short film about regrets and a lost love"

@@ -50,3 +50,39 @@ export function getAutoThumbnail(url: string): string | null {
   }
   return null;
 }
+
+/**
+ * Muted, controls-free, looping embed URL for a purely decorative background
+ * video (e.g. the homepage hero) — no play/pause/fullscreen UI, autoplays,
+ * and loops a single video indefinitely. Pair with pointer-events-none on
+ * the iframe so nothing here is actually clickable either.
+ */
+export function getBackgroundEmbedUrl(url: string): string | null {
+  const provider = getVideoProvider(url);
+  if (provider === 'youtube') {
+    const id = getYouTubeId(url);
+    if (!id) return null;
+    const params = new URLSearchParams({
+      autoplay: '1',
+      mute: '1',
+      controls: '0',
+      loop: '1',
+      playlist: id, // required by YouTube for a single video to loop
+      modestbranding: '1',
+      disablekb: '1',
+      iv_load_policy: '3',
+      rel: '0',
+      playsinline: '1',
+    });
+    return `https://www.youtube-nocookie.com/embed/${id}?${params.toString()}`;
+  }
+  if (provider === 'vimeo') {
+    const id = getVimeoId(url);
+    if (!id) return null;
+    // Vimeo's `background=1` is purpose-built for this: mutes, hides all
+    // controls, autoplays and loops.
+    const params = new URLSearchParams({ background: '1', autoplay: '1', loop: '1', muted: '1' });
+    return `https://player.vimeo.com/video/${id}?${params.toString()}`;
+  }
+  return null;
+}

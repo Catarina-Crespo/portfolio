@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import { useTranslations, type Lang } from '../../i18n/utils';
-import SectionHeading from '../SectionHeading.astro';
+import PageIntro from '../PageIntro.astro';
 import WorkCard from '../WorkCard.astro';
 import { catalogCode } from '../../utils/catalog';
 
@@ -21,32 +21,7 @@ const motion = all.filter((i) => i.data.category === 'motion-graphics').sort((a,
 const design = all.filter((i) => i.data.category === 'design-project').sort((a, b) => a.data.order - b.data.order);
 ---
 
-<section class="mx-auto max-w-7xl px-5 md:px-8 pt-16 pb-10">
-  <SectionHeading eyebrow={t('other.eyebrow')} title={t('other.title')} description={t('other.intro')} />
-</section>
-
-{threeD.length > 0 && (
-  <section class="mx-auto max-w-7xl px-5 md:px-8 py-10">
-    <div class="mb-10" data-reveal>
-      <p class="timecode text-amber-500 mb-2">{t('other.3d.title')}</p>
-      <p class="text-paper-400 max-w-lg">{t('other.3d.desc')}</p>
-    </div>
-    <div class="grid gap-8 sm:grid-cols-2">
-      {threeD.map((item, i) => (
-        <WorkCard
-          title={item.data.title[lang]}
-          description={item.data.description?.[lang]}
-          meta={item.data.year ? String(item.data.year) : undefined}
-          code={catalogCode('3D', i + 1)}
-          videoUrl={item.data.videoUrl}
-          thumbnail={item.data.thumbnail}
-          image={item.data.image}
-          playLabel={t('common.play')}
-        />
-      ))}
-    </div>
-  </section>
-)}
+<PageIntro eyebrow={t('other.eyebrow')} title={t('other.title')} description={t('other.intro')} />
 
 {motion.length > 0 && (
   <section class="mx-auto max-w-7xl px-5 md:px-8 py-10">
@@ -65,6 +40,31 @@ const design = all.filter((i) => i.data.category === 'design-project').sort((a, 
           thumbnail={item.data.thumbnail}
           image={item.data.image}
           playLabel={t('common.play')}
+          fullscreenLabel={t('common.fullscreen')}
+        />
+      ))}
+    </div>
+  </section>
+)}
+
+{threeD.length > 0 && (
+  <section class="mx-auto max-w-7xl px-5 md:px-8 pt-8 pb-10">
+    <div class="mb-10" data-reveal>
+      <p class="timecode text-amber-500 mb-2">{t('other.3d.title')}</p>
+      <p class="text-paper-400 max-w-lg">{t('other.3d.desc')}</p>
+    </div>
+    <div class="grid gap-8 sm:grid-cols-2">
+      {threeD.map((item, i) => (
+        <WorkCard
+          title={item.data.title[lang]}
+          description={item.data.description?.[lang]}
+          meta={item.data.year ? String(item.data.year) : undefined}
+          code={catalogCode('3D', i + 1)}
+          videoUrl={item.data.videoUrl}
+          thumbnail={item.data.thumbnail}
+          image={item.data.image}
+          playLabel={t('common.play')}
+          fullscreenLabel={t('common.fullscreen')}
         />
       ))}
     </div>
@@ -88,6 +88,7 @@ const design = all.filter((i) => i.data.category === 'design-project').sort((a, 
           thumbnail={item.data.thumbnail}
           image={item.data.image}
           playLabel={t('common.play')}
+          fullscreenLabel={t('common.fullscreen')}
           aspect="portrait"
         />
       ))}

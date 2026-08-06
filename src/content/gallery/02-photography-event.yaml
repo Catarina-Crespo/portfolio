@@ -1,0 +1,4 @@
+src: "https://picsum.photos/seed/wedding-05/900/900"
+alt: { en: "First dance at a wedding", pt: "Primeira dança num casamento" }
+order: 2
+enabled: true

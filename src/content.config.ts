@@ -97,4 +97,18 @@ const testimonials = defineCollection({
   }),
 });
 
-export const collections = { filming, photography, stopmotion, other, testimonials };
+// A curated strip of stills for the homepage gallery marquee — mix in
+// whatever's a good look: a still from a video, an event photo, a stop
+// motion frame, a render, etc. See "home.gallery" in Home.astro for the
+// on/off switch for the whole section.
+const gallery = defineCollection({
+  loader: glob({ pattern: '**/*.yaml', base: './src/content/gallery' }),
+  schema: z.object({
+    src: z.string(),
+    alt: bilingualOptional.optional(),
+    order: z.number().default(0),
+    enabled: z.boolean().default(true),
+  }),
+});
+
+export const collections = { filming, photography, stopmotion, other, testimonials, gallery };

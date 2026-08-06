@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import { useTranslations, type Lang } from '../../i18n/utils';
-import SectionHeading from '../SectionHeading.astro';
+import PageIntro from '../PageIntro.astro';
 import PhotoMosaic from '../react/PhotoMosaic.tsx';
 
 interface Props {
@@ -15,12 +15,10 @@ const events = all.filter((i) => i.data.kind === 'event').sort((a, b) => a.data.
 const landscapes = all.filter((i) => i.data.kind === 'landscape').sort((a, b) => a.data.order - b.data.order);
 ---
 
-<section class="mx-auto max-w-7xl px-5 md:px-8 pt-16 pb-10">
-  <SectionHeading eyebrow={t('photography.eyebrow')} title={t('photography.title')} description={t('photography.intro')} />
-</section>
+<PageIntro eyebrow={t('photography.eyebrow')} title={t('photography.title')} description={t('photography.intro')} />
 
 {events.length > 0 && (
-  <section class="mx-auto max-w-7xl px-5 md:px-8 py-10">
+  <section class="mx-auto max-w-7xl px-5 md:px-8 pt-8 pb-10">
     <div class="mb-10" data-reveal>
       <p class="timecode text-amber-500 mb-2">{t('photography.events.title')}</p>
       <p class="text-paper-400 max-w-lg">{t('photography.events.desc')}</p>

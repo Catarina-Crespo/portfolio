@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import { useTranslations, type Lang } from '../../i18n/utils';
-import SectionHeading from '../SectionHeading.astro';
+import PageIntro from '../PageIntro.astro';
 import WorkCard from '../WorkCard.astro';
 import { catalogCode } from '../../utils/catalog';
 
@@ -42,11 +42,9 @@ const filters: { key: string; label: string }[] = [
 ];
 ---
 
-<section class="mx-auto max-w-7xl px-5 md:px-8 pt-16 pb-10">
-  <SectionHeading eyebrow={t('stopmotion.eyebrow')} title={t('stopmotion.title')} description={t('stopmotion.intro')} />
-</section>
+<PageIntro eyebrow={t('stopmotion.eyebrow')} title={t('stopmotion.title')} description={t('stopmotion.intro')} />
 
-<section class="mx-auto max-w-7xl px-5 md:px-8 pb-20">
+<section class="mx-auto max-w-7xl px-5 md:px-8 pt-8 pb-20">
   <div class="mb-10 flex flex-wrap gap-2" data-reveal role="group" aria-label="Filter">
     {filters.map((f, i) => (
       <button
@@ -76,6 +74,7 @@ const filters: { key: string; label: string }[] = [
           videoUrl={item.data.videoUrl}
           thumbnail={item.data.thumbnail}
           playLabel={t('common.play')}
+          fullscreenLabel={t('common.fullscreen')}
           comingSoonLabel={item.data.format === 'upcoming' ? t('common.comingSoon') : undefined}
         />
       </div>
@@ -100,6 +99,7 @@ const filters: { key: string; label: string }[] = [
             videoUrl={item.data.videoUrl}
             thumbnail={item.data.thumbnail}
             playLabel={t('common.play')}
+            fullscreenLabel={t('common.fullscreen')}
             comingSoonLabel={item.data.format === 'upcoming' ? t('common.comingSoon') : undefined}
             aspect="shorts"
           />
