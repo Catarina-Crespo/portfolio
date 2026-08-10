@@ -8,31 +8,31 @@ description:
 order: 1
 enabled: true
 images:
-  - src: "images/photography/landscape/1.jpg"
+  - src: "/images/photography/landscape/1.jpg"
     alt: { en: "Boats", pt: "Barcos" }
     size: normal
-  - src: "images/photography/landscape/2.jpg"
+  - src: "/images/photography/landscape/2.jpg"
     alt: { en: "House among the trees", pt: "Casa no meio das árvores" }
     size: tall
-  - src: "images/photography/landscape/9.jpg"
+  - src: "/images/photography/landscape/9.jpg"
     alt: { en: "Reek", pt: "Riacho" }
     size: wide
-  - src: "images/photography/landscape/5.jpg"
+  - src: "/images/photography/landscape/5.jpg"
     alt: { en: "Tower", pt: "Torre" }
     size: tall
-  - src: "images/photography/landscape/4.jpg"
+  - src: "/images/photography/landscape/4.jpg"
     alt: { en: "Scene from a town", pt: "Cena de uma aldeia" }
     size: large
-  - src: "images/photography/landscape/8.jpg"
+  - src: "/images/photography/landscape/8.jpg"
     alt: { en: "Mountains", pt: "Montanhas" }
     size: normal
-  - src: "images/photography/landscape/10.jpeg"
+  - src: "/images/photography/landscape/10.jpeg"
     alt: { en: "Water on the rocks", pt: "Água nas rochas" }
     size: wide
-  - src: "images/photography/landscape/7.jpg"
+  - src: "/images/photography/landscape/7.jpg"
     alt: { en: "Houses by the river", pt: "Casas ao longo de um rio" }
     size: normal
-  - src: "images/photography/landscape/6.jpg"
+  - src: "/images/photography/landscape/6.jpg"
     alt: { en: "Mountains", pt: "Montanhas" }
     size: normal
 

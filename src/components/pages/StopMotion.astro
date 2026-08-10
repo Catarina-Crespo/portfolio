@@ -135,6 +135,7 @@ const filters: { key: string; label: string }[] = [
     });
   }
 
-  initStopMotionFilter();
+  // astro:page-load fires on the initial load too, so a separate direct
+  // call here would double-init this and attach duplicate listeners.
   document.addEventListener('astro:page-load', initStopMotionFilter);
 </script>

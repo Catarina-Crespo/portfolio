@@ -195,6 +195,8 @@ const projectTypes = [
     });
   }
 
-  initContactForm();
+  // astro:page-load fires on the initial load too, so a separate direct
+  // call here would double-init this — meaning every submit would fire
+  // two fetch() calls to Formspree, submitting the message twice.
   document.addEventListener('astro:page-load', initContactForm);
 </script>

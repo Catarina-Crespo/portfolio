@@ -322,6 +322,33 @@ html.has-custom-cursor label {
 }
 
 /* ============================================================
+   MOBILE NAV PANEL
+   A single custom class instead of toggling pairs of opposing
+   Tailwind utilities (opacity-0/opacity-100, etc) for the open/closed
+   state — that approach turned out fragile (this class is the fix for
+   a background that kept rendering transparent). Background here is
+   solid and unconditional, set once, never toggled; only opacity,
+   transform and pointer-events change between states, all driven by
+   a single .is-open modifier.
+   ============================================================ */
+.mobile-panel {
+  position: fixed;
+  inset: 0;
+  top: 57px;
+  z-index: 40;
+  background-color: var(--color-ink-950);
+  opacity: 0;
+  transform: translateY(-8px);
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.mobile-panel.is-open {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* ============================================================
    NAV BOX — hover effect for the header nav links
    A rectangle draws itself around the link on hover: the top/bottom
    bars (on the <a>) and the left/right bars (on the inner <span>)

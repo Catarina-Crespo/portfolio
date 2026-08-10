@@ -9,8 +9,8 @@ description:
 role:
   en: "Director, Camera, Editor"
   pt: "Realização, Câmara, Edição"
-videoUrl: "images/filming/interviews/interview_2.mp4"
-thumbnail: "images/filming/interviews/thumb_2.png"
+videoUrl: "/images/filming/interviews/interview_2.mp4"
+thumbnail: "/images/filming/interviews/thumb_2.png"
 year: 2025
 order: 1
 enabled: true

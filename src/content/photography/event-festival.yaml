@@ -12,24 +12,24 @@ date: "2025-07-19"
 order: 3
 enabled: true
 images:
-  - src: "images/photography/escstunis/1.jpg"
+  - src: "/images/photography/escstunis/1.jpg"
     alt: { en: "Tambourines performing", pt: "Pandeiretas a atuar" }
     size: large
-  - src: "images/photography/escstunis/2.jpg"
+  - src: "/images/photography/escstunis/2.jpg"
     alt: { en: "People singing and playing various instruments", pt: "Pessoas a cantar e a tocar diversos instrumentos" }
     size: normal
-  - src: "images/photography/escstunis/3.jpg"
+  - src: "/images/photography/escstunis/3.jpg"
     alt: { en: "Girl playing bass guitar", pt: "Rapariga a tocar contrabaixo" }
     size: tall
-  - src: "images/photography/escstunis/4.jpg"
+  - src: "/images/photography/escstunis/4.jpg"
     alt: { en: "Girl holding the university flags", pt: "Rapariga a segurar as bandeiras da faculdade" }
     size: tall
-  - src: "images/photography/escstunis/5.jpg"
+  - src: "/images/photography/escstunis/5.jpg"
     alt: { en: "Guy holding tambourines while jumping", pt: "Rapaz a tocar pandeireta enquanto salta" }
     size: normal
-  - src: "images/photography/escstunis/6.jpg"
+  - src: "/images/photography/escstunis/6.jpg"
     alt: { en: "Girl performing with the banners", pt: "Rapariga a atuar com os estandartes" }
     size: normal
-  - src: "images/photography/escstunis/7.jpg"
+  - src: "/images/photography/escstunis/7.jpg"
     alt: { en: "People playing various instruments", pt: "Pessoas a tocar diferentes instrumentos" }
     size: normal

@@ -12,21 +12,21 @@ date: "2026-07-02"
 order: 2
 enabled: true
 images:
-  - src: "images/photography/water_fight/6.jpg"
+  - src: "/images/photography/water_fight/6.jpg"
     alt: { en: "Panoramic photo of the event participants", pt: "Foto panorâmica dos participantes do evento" }
     size: wide
-  - src: "images/photography/water_fight/1.jpg"
+  - src: "/images/photography/water_fight/1.jpg"
     alt: { en: "Man shooting his water gun", pt: "Homem a disparar com a sua pistola de água" }
     size: normal
-  - src: "images/photography/water_fight/3.jpg"
+  - src: "/images/photography/water_fight/3.jpg"
     alt: { en: "Man with a mask pointing his water gun at the camera", pt: "Homem mascarado a apontar a sua pistola de água para a câmara" }
     size: tall
-  - src: "images/photography/water_fight/2.jpg"
+  - src: "/images/photography/water_fight/2.jpg"
     alt: { en: "Man in white shirt shooting his water gun", pt: "Homem de camisa branca a disparar com a sua pistola de água" }
     size: normal
-  - src: "images/photography/water_fight/4.jpg"
+  - src: "/images/photography/water_fight/4.jpg"
     alt: { en: "Man celebrating holding a flag", pt: "Homem festeja segurando uma bandeira" }
     size: normal
-  - src: "images/photography/water_fight/5.jpg"
+  - src: "/images/photography/water_fight/5.jpg"
     alt: { en: "Man filling up his water gun", pt: "Homem a encher a sua pistola de água" }
     size: normal

@@ -60,29 +60,41 @@ const currentPath = '/' + parts.join('/');
       </button>
     </div>
   </div>
-
-  <div
-    id="mobile-nav-panel"
-    data-nav-panel
-    class="lg:hidden fixed inset-0 top-[57px] z-40 -translate-y-2 opacity-0 pointer-events-none transition-all duration-300 bg-ink-950/98 backdrop-blur-md"
-  >
-    <nav class="flex flex-col gap-1 px-6 py-8" aria-label="Mobile">
-      {links.map((link, i) => (
-        <a
-          href={link.href}
-          data-nav-link
-          class="timecode py-3 text-2xl font-display normal-case tracking-tight text-paper-200 border-b border-ink-800"
-          aria-current={currentPath === link.match ? 'page' : undefined}
-        >
-          <span class="text-amber-500 mr-3 text-sm align-middle">0{i + 1}</span>{link.label}
-        </a>
-      ))}
-    </nav>
-    <div class="px-6">
-      <LanguageSwitcher lang={lang} />
-    </div>
-  </div>
 </header>
+
+<!--
+  Deliberately NOT nested inside <header>: that element has
+  backdrop-blur (backdrop-filter), and any non-none backdrop-filter/
+  filter/transform on an ancestor makes THAT ancestor the containing
+  block for position:fixed descendants instead of the viewport. Since
+  header is only ~57px tall, this panel's "bottom: 0" was resolving
+  against the header's own bottom edge (~57px down) rather than the
+  screen's, collapsing its real height to almost nothing — which is
+  why the background only ever painted a sliver and everything below
+  it showed the page through. Being a sibling instead means the
+  viewport is its containing block again, same as before.
+-->
+<div
+  id="mobile-nav-panel"
+  data-nav-panel
+  class="mobile-panel lg:hidden"
+>
+  <nav class="flex flex-col gap-1 px-6 py-8" aria-label="Mobile">
+    {links.map((link, i) => (
+      <a
+        href={link.href}
+        data-nav-link
+        class="timecode py-3 text-2xl font-display normal-case tracking-tight text-paper-200 border-b border-ink-800"
+        aria-current={currentPath === link.match ? 'page' : undefined}
+      >
+        <span class="text-amber-500 mr-3 text-sm align-middle">0{i + 1}</span>{link.label}
+      </a>
+    ))}
+  </nav>
+  <div class="px-6">
+    <LanguageSwitcher lang={lang} />
+  </div>
+</div>
 
 <script>
   function initNav() {
@@ -94,14 +106,7 @@ const currentPath = '/' + parts.join('/');
 
     const setOpen = (open: boolean) => {
       toggle.setAttribute('aria-expanded', String(open));
-      panel.classList.toggle('opacity-0', !open);
-      panel.classList.toggle('opacity-100', open);
-
-      panel.classList.toggle('pointer-events-none', !open);
-      panel.classList.toggle('pointer-events-auto', open);
-
-      panel.classList.toggle('-translate-y-2', !open);
-      panel.classList.toggle('translate-y-0', open);
+      panel.classList.toggle('is-open', open);
       document.body.classList.toggle('overflow-hidden', open);
       if (bars[0]) bars[0].style.transform = open ? 'translateY(6px) rotate(45deg)' : '';
       if (bars[1]) bars[1].style.opacity = open ? '0' : '1';
@@ -125,6 +130,10 @@ const currentPath = '/' + parts.join('/');
     setOpen(false);
   }
 
-  initNav();
+  // astro:page-load fires on the initial load too, so a separate direct
+  // call here would double-init this: two click listeners would both
+  // read aria-expanded on the same click, and the second one would read
+  // the value the first one just set, immediately toggling it back —
+  // which is exactly why the mobile menu wasn't opening.
   document.addEventListener('astro:page-load', initNav);
 </script>

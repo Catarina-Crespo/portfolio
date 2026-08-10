@@ -9,8 +9,8 @@ description:
 role:
   en: "Writer, Director, Editor"
   pt: "Argumento, Realização, Edição"
-videoUrl: "images/filming/films/cordasDaMemoria.mp4"
-thumbnail: "images/filming/films/thumb_1.png"
+videoUrl: "/images/filming/films/cordasDaMemoria.mp4"
+thumbnail: "/images/filming/films/thumb_1.png"
 year: 2026
 order: 1
 enabled: true

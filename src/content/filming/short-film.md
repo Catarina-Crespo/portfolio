@@ -9,8 +9,8 @@ description:
 role:
   en: "Writer, Director, Editor"
   pt: "Argumento, Realização, Edição"
-videoUrl: "images/filming/films/curta.mp4"
-thumbnail: "images/filming/films/thumb_2.png"
+videoUrl: "/images/filming/films/curta.mp4"
+thumbnail: "/images/filming/films/thumb_2.png"
 year: 2024
 order: 2
 enabled: true

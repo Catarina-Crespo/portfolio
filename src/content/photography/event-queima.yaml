@@ -12,21 +12,21 @@ date: "2025-05-11"
 order: 1
 enabled: true
 images:
-  - src: "images/photography/bencao_nova/1.jpg"
+  - src: "/images/photography/bencao_nova/1.jpg"
     alt: { en: "Couple hugging", pt: "Casal a abraçar-se" }
     size: tall
-  - src: "images/photography/bencao_nova/4.jpg"
+  - src: "/images/photography/bencao_nova/4.jpg"
     alt: { en: "Panoramic photo of some of the graduates", pt: "Fotografia panorâmica de alguns dos alunos finalistas" }
     size: wide
-  - src: "images/photography/bencao_nova/6.jpg"
+  - src: "/images/photography/bencao_nova/6.jpg"
     alt: { en: "Group photo of some graduates", pt: "Fotografia de grupo de alguns finalistas" }
     size: normal
-  - src: "images/photography/bencao_nova/5.jpg"
+  - src: "/images/photography/bencao_nova/5.jpg"
     alt: { en: "Photo with two finalists", pt: "Foto com duas finalistas" }
     size: tall
-  - src: "images/photography/bencao_nova/3.jpg"
+  - src: "/images/photography/bencao_nova/3.jpg"
     alt: { en: "Photo with students making a toast", pt: "Foto com alunos a fazer um brinde" }
     size: large
-  - src: "images/photography/bencao_nova/2.jpg"
+  - src: "/images/photography/bencao_nova/2.jpg"
     alt: { en: "Photo of a student burning his black ribbon", pt: "Fotografia de um estudante a queimar a sua fita preta" }
     size: normal

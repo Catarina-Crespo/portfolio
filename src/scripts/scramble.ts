@@ -105,5 +105,7 @@ function initScramble() {
   new TextScrambler(el, words).start();
 }
 
-initScramble();
-document.addEventListener('astro:page-load', initScramble);
+// astro:page-load fires on the initial load too, so a separate
+  // direct call here would double-init this (and for anything that
+  // toggles based on current state, like a menu, that self-cancels).
+  document.addEventListener('astro:page-load', initScramble);
