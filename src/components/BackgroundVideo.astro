@@ -17,6 +17,8 @@ const poster = thumbnail || (videoUrl ? getAutoThumbnail(videoUrl) : null);
 <div class={`h-full w-full overflow-hidden bg-ink-900 ${className}`} aria-hidden="true">
   {embedUrl ? (
     <iframe
+      data-bg-video-embed
+      data-bg-video-provider={provider}
       src={embedUrl}
       title={title}
       class="pointer-events-none absolute inset-0 h-full w-full"
@@ -25,6 +27,7 @@ const poster = thumbnail || (videoUrl ? getAutoThumbnail(videoUrl) : null);
     />
   ) : provider === 'file' && videoUrl ? (
     <video
+      data-bg-video-file
       src={videoUrl}
       poster={poster ?? undefined}
       class="pointer-events-none absolute inset-0 h-full w-full object-cover"
@@ -40,3 +43,55 @@ const poster = thumbnail || (videoUrl ? getAutoThumbnail(videoUrl) : null);
     <div class="absolute inset-0 bg-gradient-to-br from-ink-800 to-ink-900" />
   )}
 </div>
+
+<script>
+  // The `autoplay=1` URL param / `autoplay` attribute alone isn't always
+  // honored on the first try — slow connections, or the browser just not
+  // having "warmed up" to allow it yet — which is why this sometimes sat
+  // on the first frame until a refresh. This sends an explicit play
+  // command instead (retried once shortly after load), plus a few
+  // fallback triggers that are each independently guaranteed to unblock
+  // playback if the browser was withholding it for any reason.
+  function sendPlayCommand(iframe: HTMLIFrameElement, provider: string) {
+    if (!iframe.contentWindow) return;
+    if (provider === 'youtube') {
+      iframe.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'playVideo', args: [] }), '*');
+    } else if (provider === 'vimeo') {
+      iframe.contentWindow.postMessage(JSON.stringify({ method: 'play' }), '*');
+    }
+  }
+
+  function initBackgroundVideo() {
+    const iframe = document.querySelector<HTMLIFrameElement>('[data-bg-video-embed]');
+    const video = document.querySelector<HTMLVideoElement>('[data-bg-video-file]');
+    if (!iframe && !video) return;
+
+    const kick = () => {
+      if (iframe) sendPlayCommand(iframe, iframe.dataset.bgVideoProvider || '');
+      if (video && video.paused) video.play().catch(() => {});
+    };
+
+    if (iframe) {
+      iframe.addEventListener('load', () => {
+        kick();
+        setTimeout(kick, 800); // second attempt, in case the player wasn't ready yet
+      });
+    }
+    if (video) {
+      video.play().catch(() => {
+        /* will retry via the fallback triggers below */
+      });
+    }
+
+    // Any of these guarantee the browser will allow playback, so they
+    // double as a safety net regardless of why autoplay didn't fire.
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') kick();
+    });
+    (['pointerdown', 'touchstart', 'keydown'] as const).forEach((evt) => {
+      document.addEventListener(evt, kick, { once: true, passive: true });
+    });
+  }
+
+  document.addEventListener('astro:page-load', initBackgroundVideo);
+</script>

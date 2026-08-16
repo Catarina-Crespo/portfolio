@@ -5,7 +5,7 @@
  * links across the whole site. Nothing else in the codebase needs to change.
  */
 export const site = {
-  name: 'Miguel Crespo',
+  name: 'Miguel V. Crespo',
   shortName: 'MC',
   role: {
     en: 'Filmmaker & Photographer',
@@ -32,5 +32,5 @@ export const site = {
   //      paste it in here.
   //   3. That's it — submissions land in your Formspree inbox/email.
   // Free tier is 50 submissions/month, plenty for a portfolio site.
-  contactFormEndpoint: 'https://formspree.io/f/xkjwjdgy',
+  contactFormEndpoint: 'https://formspree.io/f/YOUR_FORM_ID',
 } as const;

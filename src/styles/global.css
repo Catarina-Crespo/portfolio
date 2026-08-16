@@ -37,6 +37,7 @@
   --font-display: "Space Grotesk", "Arial Narrow", sans-serif;
   --font-body: "IBM Plex Sans", "Helvetica Neue", sans-serif;
   --font-mono: "Inter", ui-monospace, monospace;
+  --font-handwritting: "Tangerine", "Arial Narrow", sans-serif;
 
   /* --- Radius: soft but not bubbly --- */
   --radius-card: 0.375rem;

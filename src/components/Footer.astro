@@ -2,6 +2,7 @@
 import { useTranslations, localizePath, type Lang } from '../i18n/utils';
 import { site } from '../config/site';
 import SocialIcon from './icons/SocialIcon.astro';
+import LanguageSwitcher from './LanguageSwitcher.astro';
 
 interface Props {
   lang: Lang;
@@ -55,8 +56,9 @@ const year = new Date().getFullYear();
   </div>
 
   <div class="border-t border-ink-800">
-    <div class="mx-auto max-w-7xl px-5 md:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-2 timecode text-paper-400/80">
+    <div class="mx-auto max-w-7xl px-5 md:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-4 timecode text-paper-400/80">
       <p>&copy; {year} {site.name} — {t('footer.rights')}</p>
+      <LanguageSwitcher lang={lang} />
       <p>{t('footer.made')}</p>
     </div>
   </div>

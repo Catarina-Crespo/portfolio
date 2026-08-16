@@ -1,4 +1,4 @@
-const SCRAMBLE_CHARS = '!<>-_\\/[]{}—=+*^?#';
+const SCRAMBLE_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
 class TextScrambler {
   private el: HTMLElement;

@@ -30,3 +30,68 @@ images:
   - src: "/images/photography/bencao_nova/2.jpg"
     alt: { en: "Photo of a student burning his black ribbon", pt: "Fotografia de um estudante a queimar a sua fita preta" }
     size: normal
+  - src: "/images/photography/bencao_nova/7.jpg"
+    alt: { en: "", pt: "" }
+    size: normal
+  - src: "/images/photography/bencao_nova/8.jpg"
+    alt: { en: "", pt: "" }
+    size: tall
+  - src: "/images/photography/bencao_nova/9.jpg"
+    alt: { en: "", pt: "" }
+    size: normal
+  - src: "/images/photography/bencao_nova/10.jpg"
+    alt: { en: "", pt: "" }
+    size: tall
+  - src: "/images/photography/bencao_nova/11.jpg"
+    alt: { en: "", pt: "" }
+    size: normal
+  - src: "/images/photography/bencao_nova/12.jpg"
+    alt: { en: "", pt: "" }
+    size: normal
+  - src: "/images/photography/bencao_nova/13.jpg"
+    alt: { en: "", pt: "" }
+    size: normal
+  - src: "/images/photography/bencao_nova/14.jpg"
+    alt: { en: "", pt: "" }
+    size: normal
+  - src: "/images/photography/bencao_nova/15.jpg"
+    alt: { en: "", pt: "" }
+    size: normal
+  - src: "/images/photography/bencao_nova/16.jpg"
+    alt: { en: "", pt: "" }
+    size: normal
+  - src: "/images/photography/bencao_nova/17.jpg"
+    alt: { en: "", pt: "" }
+    size: normal
+  - src: "/images/photography/bencao_nova/18.jpg"
+    alt: { en: "", pt: "" }
+    size: normal
+  - src: "/images/photography/bencao_nova/19.jpg"
+    alt: { en: "", pt: "" }
+    size: normal
+  - src: "/images/photography/bencao_nova/20.jpg"
+    alt: { en: "", pt: "" }
+    size: normal
+  - src: "/images/photography/bencao_nova/21.jpg"
+    alt: { en: "", pt: "" }
+    size: normal
+  - src: "/images/photography/bencao_nova/22.jpg"
+    alt: { en: "", pt: "" }
+    size: normal
+  - src: "/images/photography/bencao_nova/23.jpg"
+    alt: { en: "", pt: "" }
+    size: normal
+  - src: "/images/photography/bencao_nova/27.jpg"
+    alt: { en: "", pt: "" }
+    size: tall
+  - src: "/images/photography/bencao_nova/24.jpg"
+    alt: { en: "", pt: "" }
+    size: normal
+  - src: "/images/photography/bencao_nova/25.jpg"
+    alt: { en: "", pt: "" }
+    size: normal
+  - src: "/images/photography/bencao_nova/26.jpg"
+    alt: { en: "", pt: "" }
+    size: normal
+
+   

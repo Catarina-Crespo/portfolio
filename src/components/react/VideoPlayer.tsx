@@ -101,7 +101,12 @@ export default function VideoPlayer({
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; fullscreen; gyroscope; picture-in-picture"
           allowFullScreen
         />
-        <FullscreenButton label={fullscreenLabel} onClick={() => requestFullscreen(iframeRef.current)} />
+        {/* Custom button only for reels: YouTube/Vimeo hide their own
+            fullscreen control on narrow embeds like these. Regular
+            (wider) videos keep the provider's default fullscreen UI. */}
+        {aspect === 'shorts' && (
+          <FullscreenButton label={fullscreenLabel} onClick={() => requestFullscreen(iframeRef.current)} />
+        )}
       </div>
     );
   }
@@ -110,7 +115,11 @@ export default function VideoPlayer({
     return (
       <div className={`slate-frame relative overflow-hidden ${rounded} bg-ink-900 ${aspectClass[aspect]} ${className}`}>
         <video ref={videoRef} src={videoUrl} className="h-full w-full object-cover" controls autoPlay playsInline />
-        <FullscreenButton label={fullscreenLabel} onClick={() => requestFullscreen(videoRef.current)} />
+        {/* Custom button only for reels — regular videos rely on the
+            native <video controls> fullscreen button as before. */}
+        {aspect === 'shorts' && (
+          <FullscreenButton label={fullscreenLabel} onClick={() => requestFullscreen(videoRef.current)} />
+        )}
       </div>
     );
   }

@@ -10,5 +10,5 @@ mediaType: video
 videoUrl: "https://youtu.be/rd8qN24z9NQ?si=CroPVqZMFce_KclV&t=12"
 year: 2025
 order: 1
-enabled: true
+enabled: false
 ---

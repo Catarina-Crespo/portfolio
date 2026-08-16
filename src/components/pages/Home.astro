@@ -90,10 +90,10 @@ const disciplines = [
 
 // Edit these freely — just placeholder numbers.
 const stats = [
-  { value: '6+', label: t('home.stats.years') },
-  { value: '80+', label: t('home.stats.projects') },
-  { value: '35+', label: t('home.stats.events') },
-  { value: '120K+', label: t('home.stats.frames') },
+  { value: '10+', label: t('home.stats.years') },
+  { value: '19', label: t('home.stats.projects') },
+  { value: '4', label: t('home.stats.brands') },
+  { value: '140K+', label: t('home.stats.views') },
 ];
 
 // Rotates through these in the hero's scramble-text headline
@@ -103,8 +103,7 @@ const heroWords = [
   { en: 'Filming', pt: 'Filmagem' },
   { en: 'Editing', pt: 'Edição' },
   { en: 'Stop Motion', pt: 'Stop Motion' },
-  { en: 'Motion Graphics', pt: 'Motion Graphics' },
-  { en: '3D Design', pt: 'Design 3D' },
+  { en: 'Motion Graphics', pt: 'Motion Graphics' }
 ];
 const heroWordsLocalized = heroWords.map((w) => w[lang]);
 ---
@@ -138,7 +137,7 @@ const heroWordsLocalized = heroWords.map((w) => w[lang]);
           {t('home.hero.headline2')}{' '}
           <span class="font-mono text-amber-500" data-scramble data-scramble-words={JSON.stringify(heroWordsLocalized)} aria-hidden="true">
             {heroWordsLocalized[0]}
-          </span>.
+          </span>
         </span>
         <span class="sr-only">{heroWordsLocalized.join(', ')}</span>
       </h1>
