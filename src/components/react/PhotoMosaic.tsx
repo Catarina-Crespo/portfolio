@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 export interface MosaicImage {
@@ -12,6 +12,11 @@ interface PhotoMosaicProps {
   closeLabel: string;
   prevLabel: string;
   nextLabel: string;
+  seeMoreLabel: string;
+  seeLessLabel: string;
+  // How many photos show before the "See more" button appears. The button
+  // itself is only rendered at all when there are more photos than this.
+  initialCount?: number;
 }
 
 const spanClass: Record<MosaicImage['size'], string> = {
@@ -21,17 +26,30 @@ const spanClass: Record<MosaicImage['size'], string> = {
   large: 'span-large',
 };
 
-export default function PhotoMosaic({ images, closeLabel, prevLabel, nextLabel }: PhotoMosaicProps) {
+export default function PhotoMosaic({
+  images,
+  closeLabel,
+  prevLabel,
+  nextLabel,
+  seeMoreLabel,
+  seeLessLabel,
+  initialCount = 6,
+}: PhotoMosaicProps) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const [expanded, setExpanded] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  const hasMore = images.length > initialCount;
+  const visibleImages = expanded ? images : images.slice(0, initialCount);
 
   const close = useCallback(() => setActiveIndex(null), []);
   const showPrev = useCallback(
-    () => setActiveIndex((i) => (i === null ? null : (i - 1 + images.length) % images.length)),
-    [images.length],
+    () => setActiveIndex((i) => (i === null ? null : (i - 1 + visibleImages.length) % visibleImages.length)),
+    [visibleImages.length],
   );
   const showNext = useCallback(
-    () => setActiveIndex((i) => (i === null ? null : (i + 1) % images.length)),
-    [images.length],
+    () => setActiveIndex((i) => (i === null ? null : (i + 1) % visibleImages.length)),
+    [visibleImages.length],
   );
 
   useEffect(() => {
@@ -49,12 +67,22 @@ export default function PhotoMosaic({ images, closeLabel, prevLabel, nextLabel }
     };
   }, [activeIndex, close, showPrev, showNext]);
 
-  const active = activeIndex !== null ? images[activeIndex] : null;
+  function toggleExpanded() {
+    if (expanded) {
+      // Collapsing can pull the button (and the section below it) far up
+      // the page from where the person was scrolled to — bring the top
+      // of this gallery back into view so it doesn't feel disorienting.
+      sectionRef.current?.scrollIntoView({ block: 'nearest' });
+    }
+    setExpanded((e) => !e);
+  }
+
+  const active = activeIndex !== null ? visibleImages[activeIndex] : null;
 
   return (
-    <>
+    <div ref={sectionRef}>
       <div className="mosaic">
-        {images.map((img, i) => (
+        {visibleImages.map((img, i) => (
           <button
             key={img.src + i}
             type="button"
@@ -71,6 +99,19 @@ export default function PhotoMosaic({ images, closeLabel, prevLabel, nextLabel }
           </button>
         ))}
       </div>
+
+      {hasMore && (
+        <div className="mt-6 flex justify-center">
+          <button
+            type="button"
+            onClick={toggleExpanded}
+            className="timecode inline-flex items-center gap-2 rounded-full border border-ink-700 px-5 py-2.5 text-paper-300 transition-colors hover:border-amber-500 hover:text-amber-500"
+          >
+            {expanded ? seeLessLabel : seeMoreLabel}
+            <span aria-hidden="true">{expanded ? '\u2212' : '+'}</span>
+          </button>
+        </div>
+      )}
 
       {active && createPortal(
         <div
@@ -118,11 +159,11 @@ export default function PhotoMosaic({ images, closeLabel, prevLabel, nextLabel }
           </button>
 
           <p className="absolute bottom-4 sm:bottom-6 timecode text-paper-400">
-            {String(activeIndex! + 1).padStart(2, '0')} / {String(images.length).padStart(2, '0')}
+            {String(activeIndex! + 1).padStart(2, '0')} / {String(visibleImages.length).padStart(2, '0')}
           </p>
         </div>,
         document.body,
       )}
-    </>
+    </div>
   );
 }
