@@ -89,7 +89,7 @@ const design = all.filter((i) => i.data.category === 'design-project').sort((a, 
           image={item.data.image}
           playLabel={t('common.play')}
           fullscreenLabel={t('common.fullscreen')}
-          aspect="portrait"
+          aspect={item.data.aspect}
         />
       ))}
     </div>
