@@ -54,7 +54,7 @@ const e2 = all.filter((i) => i.data.category === 'e2').sort((a, b) => a.data.ord
         <p class="mt-2 text-paper-400 max-w-lg">{t('filming.shortfilms.desc')}</p>
       </div>
     </div>
-    <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+    <div class="grid gap-8 sm:grid-cols-2">
       {shortFilms.map((item, i) => (
         <WorkCard
           title={item.data.title[lang]}

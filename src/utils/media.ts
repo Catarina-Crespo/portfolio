@@ -1,9 +1,10 @@
-export type VideoProvider = 'youtube' | 'vimeo' | 'file' | 'unknown';
+export type VideoProvider = 'youtube' | 'vimeo' | 'behance' | 'file' | 'unknown';
 
 export function getVideoProvider(url: string): VideoProvider {
   if (!url) return 'unknown';
   if (/youtu\.?be/.test(url)) return 'youtube';
   if (/vimeo\.com/.test(url)) return 'vimeo';
+  if (/behance\.net/.test(url)) return 'behance';
   if (/\.(mp4|webm|mov)$/i.test(url)) return 'file';
   return 'unknown';
 }
@@ -27,6 +28,18 @@ function getVimeoId(url: string): string | null {
   return match ? match[1] : null;
 }
 
+function getBehanceId(url: string): string | null {
+  // Works with either a normal project link (behance.net/gallery/ID/Name)
+  // or an embed URL already copied from Behance's own "Embed" button
+  // (behance.net/embed/project/ID).
+  const patterns = [/behance\.net\/gallery\/(\d+)/, /behance\.net\/embed\/project\/(\d+)/];
+  for (const p of patterns) {
+    const match = url.match(p);
+    if (match) return match[1];
+  }
+  return null;
+}
+
 /** Returns a src suitable for an <iframe>, or null if it's a direct file / unknown link. */
 export function getEmbedUrl(url: string): string | null {
   const provider = getVideoProvider(url);
@@ -38,6 +51,10 @@ export function getEmbedUrl(url: string): string | null {
     const id = getVimeoId(url);
     return id ? `https://player.vimeo.com/video/${id}?title=0&byline=0&portrait=0` : null;
   }
+  if (provider === 'behance') {
+    const id = getBehanceId(url);
+    return id ? `https://www.behance.net/embed/project/${id}` : null;
+  }
   return null;
 }
 
@@ -48,6 +65,8 @@ export function getAutoThumbnail(url: string): string | null {
     const id = getYouTubeId(url);
     return id ? `https://img.youtube.com/vi/${id}/hqdefault.jpg` : null;
   }
+  // Vimeo and Behance don't expose a thumbnail without an API call we'd
+  // have to make at build time — set `thumbnail` explicitly for those.
   return null;
 }
 

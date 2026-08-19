@@ -8,8 +8,8 @@ export const site = {
   name: 'Miguel V. Crespo',
   shortName: 'MC',
   role: {
-    en: 'Filmmaker & Photographer',
-    pt: 'Videógrafo & Fotógrafo',
+    en: 'Videographer, Animator & Photographer',
+    pt: 'Videógrafo, Animador & Fotógrafo',
   },
   email: 'contact@miguelvcrespo.com',
   phone: '',

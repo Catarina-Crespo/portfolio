@@ -203,6 +203,24 @@ h1, h2, h3, h4 {
   font-size: 0.75rem;
 }
 
+   SELF-HOSTED VIDEO IN FULLSCREEN
+   Inline/card view intentionally uses object-fit: cover so a local
+   video always fills its card with no gaps, even if its aspect ratio
+   doesn't exactly match the card's. But that same "fill and crop"
+   behavior is wrong once the video goes fullscreen — a vertical
+   reel should letterbox (black bars) at its real aspect ratio, not
+   zoom in and crop to fill a differently-shaped screen. YouTube/
+   Vimeo embeds don't have this problem since their own player
+   handles it internally; this only affects our own <video> tag.
+   The :fullscreen pseudo-class only matches while the browser's
+   Fullscreen API is actually active on that element, so this has
+   zero effect on the normal inline view.
+   ============================================================ */
+video:fullscreen {
+  object-fit: contain;
+  background-color: var(--color-ink-950);
+}
+
 /* ============================================================
    CUSTOM CURSOR — viewfinder reticle
    Only active once src/scripts/cursor.ts confirms a fine pointer
