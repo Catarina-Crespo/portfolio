@@ -113,7 +113,7 @@ const heroWordsLocalized = heroWords.map((w) => w[lang]);
   {highlight && (
     <BackgroundVideo
       videoUrl="/images/intro.mp4"
-      thumbnail={highlight.data.thumbnail}
+      thumbnail="/images/thumb.png"
       title={highlight.data.title[lang]}
       class="absolute inset-0"
     />
@@ -175,7 +175,7 @@ const heroWordsLocalized = heroWords.map((w) => w[lang]);
   <div class="mx-auto max-w-7xl px-5 md:px-8 py-10 grid grid-cols-2 gap-8 lg:grid-cols-4" data-reveal>
     {stats.map((s) => (
       <div>
-        <p class="font-display text-3xl sm:text-4xl font-semibold text-amber-500">{s.value}</p>
+        <p class="font-display text-3xl sm:text-4xl font-semibold text-amber-500" data-count-up>{s.value}</p>
         <p class="mt-1 timecode text-paper-400">{s.label}</p>
       </div>
     ))}
@@ -300,3 +300,4 @@ const heroWordsLocalized = heroWords.map((w) => w[lang]);
 </section>
 
 <script src="../../scripts/scramble.ts"></script>
+<script src="../../scripts/count-up.ts"></script>
