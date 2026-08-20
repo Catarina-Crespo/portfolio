@@ -17,6 +17,7 @@ const interviews = all.filter((i) => i.data.category === 'interview').sort((a, b
 const shortFilms = all.filter((i) => i.data.category === 'short-film').sort((a, b) => a.data.order - b.data.order);
 const videoclips = all.filter((i) => i.data.category === 'videoclip').sort((a, b) => a.data.order - b.data.order);
 const e2 = all.filter((i) => i.data.category === 'e2').sort((a, b) => a.data.order - b.data.order);
+const reelsFilming = all.filter((i) => i.data.category === 'reelsFilming').sort((a, b) => a.data.order - b.data.order);
 ---
 
 <PageIntro eyebrow={t('filming.eyebrow')} title={t('filming.title')} description={t('filming.intro')} />
@@ -91,6 +92,34 @@ const e2 = all.filter((i) => i.data.category === 'e2').sort((a, b) => a.data.ord
           playLabel={t('common.play')}
           fullscreenLabel={t('common.fullscreen')}
         />
+      ))}
+    </div>
+  </section>
+)}
+
+{reelsFilming.length > 0 && (
+  <section class="mx-auto max-w-7xl px-5 md:px-8 py-10">
+    <div class="flex items-end justify-between gap-6 mb-10" data-reveal>
+      <div>
+        <h3 class="font-display text-2xl font-semibold text-paper-100">{t('filming.reelsFilming.title')}</h3>
+        <p class="mt-2 text-paper-400 max-w-lg">{t('filming.reelsFilming.desc')}</p>
+      </div>
+    </div>
+    <div class="shelf" data-reveal>
+      {reelsFilming.map((item, i) => (
+        <div class="w-[62vw] max-w-[240px] sm:w-[220px]">
+          <WorkCard
+            title={item.data.title[lang]}
+            description={item.data.description?.[lang]}
+            code={catalogCode('REEL', i + 1)}
+            videoUrl={item.data.videoUrl}
+            thumbnail={item.data.thumbnail}
+            playLabel={t('common.play')}
+            fullscreenLabel={t('common.fullscreen')}
+            comingSoonLabel={item.data.format === 'upcoming' ? t('common.comingSoon') : undefined}
+            aspect="shorts"
+          />
+        </div>
       ))}
     </div>
   </section>

@@ -14,7 +14,7 @@ const bilingualOptional = z.object({
 const filming = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/filming' }),
   schema: z.object({
-    category: z.enum(['interview', 'short-film', 'videoclip', 'e2']),
+    category: z.enum(['interview', 'short-film', 'videoclip', 'e2', 'reelsFilming']),
     title: bilingual,
     description: bilingualOptional.optional(),
     role: bilingualOptional.optional(), // e.g. "Director, Editor"

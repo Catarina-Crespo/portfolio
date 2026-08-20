@@ -83,6 +83,8 @@ export const ui = {
     'filming.videoclips.empty': 'New videoclips are in production — check back soon.',
     'filming.e2.title': 'E2 ESCS',
     'filming.e2.desc': 'Episodes recorded for the Portuguese television channel RTP2 and edited by me.',
+    'filming.reelsFilming.title': 'Reels',
+    'filming.reelsFilming.desc': 'Some social media reels that I\'ve produced',
 
     'photography.eyebrow': 'Photography',
     'photography.title': 'Photography',
@@ -241,6 +243,8 @@ export const ui = {
     'filming.videoclips.empty': 'Novos videoclipes estão em produção — volte em breve.',
     'filming.e2.title': 'E2 ESCS',
     'filming.e2.desc': 'Episódios gravados para o canal de televisão portuguesa RTP2 e editados por mim.',
+    'filming.reelsFilming.title': 'Vídeos',
+    'filming.reelsFilming.desc': 'Alguns vídeos para redes sociais que produzi',
 
     'photography.eyebrow': 'Fotografia',
     'photography.title': 'Fotografia',

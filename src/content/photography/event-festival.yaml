@@ -36,9 +36,6 @@ images:
   - src: "/images/photography/escstunis/8.jpg"
     alt: { en: "", pt: "" }
     size: normal
-  - src: "/images/photography/escstunis/9.jpg"
-    alt: { en: "", pt: "" }
-    size: normal
   - src: "/images/photography/escstunis/10.jpg"
     alt: { en: "", pt: "" }
     size: normal
@@ -46,9 +43,6 @@ images:
     alt: { en: "", pt: "" }
     size: normal
   - src: "/images/photography/escstunis/12.jpg"
-    alt: { en: "", pt: "" }
-    size: normal
-  - src: "/images/photography/escstunis/13.jpg"
     alt: { en: "", pt: "" }
     size: normal
   - src: "/images/photography/escstunis/14.jpg"
@@ -72,19 +66,13 @@ images:
   - src: "/images/photography/escstunis/20.jpg"
     alt: { en: "", pt: "" }
     size: normal
-  - src: "/images/photography/escstunis/21.jpg"
-    alt: { en: "", pt: "" }
-    size: large
   - src: "/images/photography/escstunis/22.jpg"
     alt: { en: "", pt: "" }
     size: normal
-  - src: "/images/photography/escstunis/23.jpg"
+  - src: "/images/photography/escstunis/21.jpg"
     alt: { en: "", pt: "" }
-    size: normal
+    size: large
   - src: "/images/photography/escstunis/24.jpg"
-    alt: { en: "", pt: "" }
-    size: normal
-  - src: "/images/photography/escstunis/25.jpg"
     alt: { en: "", pt: "" }
     size: normal
   - src: "/images/photography/escstunis/26.jpg"
@@ -94,18 +82,6 @@ images:
     alt: { en: "", pt: "" }
     size: normal
   - src: "/images/photography/escstunis/28.jpg"
-    alt: { en: "", pt: "" }
-    size: normal
-  - src: "/images/photography/escstunis/29.jpg"
-    alt: { en: "", pt: "" }
-    size: normal
-  - src: "/images/photography/escstunis/30.jpg"
-    alt: { en: "", pt: "" }
-    size: normal
-  - src: "/images/photography/escstunis/31.jpg"
-    alt: { en: "", pt: "" }
-    size: normal
-  - src: "/images/photography/escstunis/32.jpg"
     alt: { en: "", pt: "" }
     size: normal
 
