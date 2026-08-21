@@ -35,9 +35,6 @@ images:
   - src: "/images/photography/landscape/7.jpg"
     alt: { en: "Houses by the river", pt: "Casas ao longo de um rio" }
     size: normal
-  - src: "/images/photography/landscape/6.jpg"
-    alt: { en: "Mountains", pt: "Montanhas" }
-    size: normal
   - src: "/images/photography/landscape/3.jpg"
     alt: { en: "", pt: "" }
     size: tall
@@ -47,13 +44,7 @@ images:
   - src: "/images/photography/landscape/12.jpg"
     alt: { en: "", pt: "" }
     size: normal
-  - src: "/images/photography/landscape/14.jpg"
-    alt: { en: "", pt: "" }
-    size: normal
   - src: "/images/photography/landscape/15.jpg"
-    alt: { en: "", pt: "" }
-    size: normal
-  - src: "/images/photography/landscape/16.jpg"
     alt: { en: "", pt: "" }
     size: normal
   - src: "/images/photography/landscape/17.jpg"
@@ -68,28 +59,13 @@ images:
   - src: "/images/photography/landscape/20.jpg"
     alt: { en: "", pt: "" }
     size: normal
-  - src: "/images/photography/landscape/46.jpg"
-    alt: { en: "", pt: "" }
-    size: normal
   - src: "/images/photography/landscape/21.jpg"
     alt: { en: "", pt: "" }
     size: large
-  - src: "/images/photography/landscape/22.jpg"
-    alt: { en: "", pt: "" }
-    size: normal
   - src: "/images/photography/landscape/23.jpg"
     alt: { en: "", pt: "" }
     size: tall
   - src: "/images/photography/landscape/24.jpg"
-    alt: { en: "", pt: "" }
-    size: normal
-  - src: "/images/photography/landscape/25.jpg"
-    alt: { en: "", pt: "" }
-    size: normal
-  - src: "/images/photography/landscape/26.jpg"
-    alt: { en: "", pt: "" }
-    size: normal
-  - src: "/images/photography/landscape/27.jpg"
     alt: { en: "", pt: "" }
     size: normal
   - src: "/images/photography/landscape/28.jpg"
@@ -110,13 +86,7 @@ images:
   - src: "/images/photography/landscape/33.jpg"
     alt: { en: "", pt: "" }
     size: normal
-  - src: "/images/photography/landscape/34.jpg"
-    alt: { en: "", pt: "" }
-    size: normal
   - src: "/images/photography/landscape/35.jpg"
-    alt: { en: "", pt: "" }
-    size: normal
-  - src: "/images/photography/landscape/36.jpg"
     alt: { en: "", pt: "" }
     size: normal
   - src: "/images/photography/landscape/37.jpg"
@@ -134,13 +104,7 @@ images:
   - src: "/images/photography/landscape/41.jpg"
     alt: { en: "", pt: "" }
     size: normal
-  - src: "/images/photography/landscape/43.jpg"
-    alt: { en: "", pt: "" }
-    size: normal
   - src: "/images/photography/landscape/44.jpg"
-    alt: { en: "", pt: "" }
-    size: normal
-  - src: "/images/photography/landscape/45.jpg"
     alt: { en: "", pt: "" }
     size: normal
   - src: "/images/photography/landscape/47.jpg"

@@ -51,9 +51,6 @@ const imageAspectClass =
     ) : (
       <VideoPlayer client:visible videoUrl={videoUrl} thumbnail={thumbnail} title={title} playLabel={playLabel} fullscreenLabel={fullscreenLabel} aspect={aspect} />
     )}
-    <span class="timecode absolute left-3 top-3 rounded bg-ink-950/70 px-2 py-1 text-paper-300 backdrop-blur-sm">
-      {code}
-    </span>
     {!videoUrl && comingSoonLabel && (
       <span class="timecode absolute right-3 top-3 rounded bg-amber-500 px-2 py-1 text-ink-950">
         {comingSoonLabel}
