@@ -32,5 +32,5 @@ export const site = {
   //      paste it in here.
   //   3. That's it — submissions land in your Formspree inbox/email.
   // Free tier is 50 submissions/month, plenty for a portfolio site.
-  contactFormEndpoint: 'https://formspree.io/f/YOUR_FORM_ID',
+  contactFormEndpoint: 'https://formspree.io/f/xkjwvldk',
 } as const;
