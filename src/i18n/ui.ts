@@ -70,8 +70,8 @@ export const ui = {
     'home.cta.footer.title': "Got a story worth telling?",
     'home.cta.footer.desc': "I'm currently booking new projects — let's talk about yours.",
 
-    'filming.eyebrow': 'Filming',
-    'filming.title': 'Film & Video',
+    'filming.eyebrow': 'Videography',
+    'filming.title': 'Films & Videos',
     'filming.intro':
       'Everything from sit-down interviews to short narrative work — shot, directed and edited by me.',
     'filming.interviews.title': 'Interviews',
@@ -98,7 +98,7 @@ export const ui = {
     'stopmotion.eyebrow': 'Stop Motion',
     'stopmotion.title': 'Stop Motion',
     'stopmotion.intro':
-      'One frame at a time. It started as a hobby, but I finally turned into a small LEGO filmography — reels, shorts and a couple of proper films.',
+      'One frame at a time. What started as a hobby grew into a small creative business — reels, shorts and a couple of proper films.',
     'stopmotion.filter.all': 'All',
     'stopmotion.filter.other': 'Other',
     'stopmotion.filter.lego': 'LEGO',
@@ -235,7 +235,7 @@ export const ui = {
     'filming.intro':
       'Desde entrevistas a curtas-metragens narrativas — filmado, realizado e editado por mim.',
     'filming.interviews.title': 'Entrevistas',
-    'filming.interviews.desc': 'Conversas filmadas com intenção — áudio limpo, luz pensada, cortes honestos.',
+    'filming.interviews.desc': 'Conversas filmadas com intenção — áudio limpo, luz pensada, cortes precisos.',
     'filming.shortfilms.title': 'Curtas-Metragens',
     'filming.shortfilms.desc': 'Trabalhos narrativos e documentais de curta duração.',
     'filming.videoclips.title': 'Videoclipes',
@@ -258,7 +258,7 @@ export const ui = {
     'stopmotion.eyebrow': 'Stop Motion',
     'stopmotion.title': 'Stop Motion',
     'stopmotion.intro':
-      'Um frame de cada vez. Começou como um hobby, mas acabou por se transformar numa pequena filmografia LEGO — reels, curtas e alguns filmes a sério.',
+      'Um frame de cada vez. Começou como um hobby, mas acabou por se transformar num negócio — reels, curtas e alguns filmes a sério.',
     'stopmotion.filter.all': 'Todos',
     'stopmotion.filter.other': 'Outros',
     'stopmotion.filter.lego': 'LEGO',
@@ -308,7 +308,7 @@ export const ui = {
     'contact.form.projectType': 'Tipo de projeto',
     'contact.form.projectTypePlaceholder': 'O que procura?',
     'contact.form.projectTypes.photography': 'Fotografia',
-    'contact.form.projectTypes.filming': 'Video',
+    'contact.form.projectTypes.filming': 'Vídeo',
     'contact.form.projectTypes.editing': 'Edição de Fotografia',
     'contact.form.projectTypes.videoediting': 'Edição de Vídeo',
     'contact.form.projectTypes.stopmotion': 'Stop Motion',
