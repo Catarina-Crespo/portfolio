@@ -5,8 +5,8 @@ title:
   en: "Tommy Shelby"
   pt: "Tommy Shelby"
 description:
-  en: "A 22-minute stop-motion film, roughly 30,000 frames, two years in the making."
-  pt: "Um filme de stop motion de 22 minutos, cerca de 30.000 frames, dois anos a fazer."
+  en: "Just a short animation inspired by one of my favorite TV series (Peaky Blinders)"
+  pt: "Uma pequena animação inspirada numa das minhas séries favoritas (Peaky Blinders)"
 videoUrl: "https://youtu.be/zTNN0K9XeS0?si=KKw2Xybte-MYMDLe"
 year: 2025
 order: 1

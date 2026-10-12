@@ -1,8 +1,8 @@
 ---
 category: interview
 title:
-  en: "Discovery"
-  pt: "Descoberta"
+  en: "The next step"
+  pt: "O próximo passo"
 description:
   en: "An interview with Marta Roquette about her inspiring journey and path in multimedia"
   pt: "Uma entrevista com Marta Roquette, sobre o seu processo e percurso inspirador em multimedia"
